@@ -15,6 +15,12 @@ export default function HomeScreen({ navigation }) {
       >
         <Text style={styles.buttonText}>Go to Groceries</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("Settings")}
+      >
+        <Text style={styles.buttonText}>Go to Settings</Text>
+      </TouchableOpacity>
     </View>
   );
 }
