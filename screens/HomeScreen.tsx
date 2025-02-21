@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-evenly",
-    width: "50%",
+    width: "100%",
     backgroundColor: "purple",
   },
   button: {
