@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "./screens/HomeScreen";
 import PantryScreen from "./screens/PantryScreen";
 import GroceryListScreen from "./screens/GroceryListScreen";
-import SettingsScreen from "./screens/SetteingsScreen";
+import SettingsScreen from "./screens/SettingsScreen";
 
 const Stack = createStackNavigator();
 
