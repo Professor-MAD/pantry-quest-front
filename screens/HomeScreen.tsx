@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
 
 export default function HomeScreen({ navigation }) {
   return (
@@ -9,6 +9,12 @@ export default function HomeScreen({ navigation }) {
         title="Go to Pantry"
         onPress={() => navigation.navigate("Pantry")}
       />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("Grocery")}
+      >
+        <Text style={styles.buttonText}>Go to Groceries</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -25,4 +31,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 20,
   },
+  button: {
+    paddingTop: 10,
+  },
+  buttonText: {},
 });
