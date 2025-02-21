@@ -5,7 +5,7 @@ import HomeScreen from "./screens/HomeScreen";
 import PantryScreen from "./screens/PantryScreen";
 import GroceryListScreen from "./screens/GroceryListScreen";
 import SettingsScreen from "./screens/SettingsScreen";
-import RecipeScreen from "./screens/RecipesScreen";
+import RecipeScreen from "./screens/RecipeScreen";
 
 const Stack = createStackNavigator();
 
@@ -17,7 +17,7 @@ export default function App() {
         <Stack.Screen name="Pantry" component={PantryScreen} />
         <Stack.Screen name="Grocery" component={GroceryListScreen} />
         <Stack.Screen name="Settings" component={SettingsScreen} />
-        <Stack.Screen name="Recipes" component={RecipeScreen} />
+        <Stack.Screen name="Recipe" component={RecipeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
