@@ -5,28 +5,34 @@ export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.mainContentContainer}>
-        <Button
-          title="Go to Pantry"
-          onPress={() => navigation.navigate("Pantry")}
-        />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Grocery")}
-        >
-          <Text style={styles.buttonText}>Go to Groceries</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Settings")}
-        >
-          <Text style={styles.buttonText}>Go to Settings</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Recipe")}
-        >
-          <Text style={styles.buttonText}>Go to Recipes</Text>
-        </TouchableOpacity>
+        <View style={styles.firstRowMainContentContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("Pantry")}
+          >
+            <Text style={styles.buttonText}>Go to Groceries</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("Grocery")}
+          >
+            <Text style={styles.buttonText}>Go to Groceries</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.firstRowMainContentContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("Settings")}
+          >
+            <Text style={styles.buttonText}>Go to Settings</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("Recipe")}
+          >
+            <Text style={styles.buttonText}>Go to Recipes</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -48,6 +54,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 10,
   },
+  firstRowMainContentContainer: {},
   title: {
     fontSize: 24,
     fontWeight: "bold",
@@ -59,6 +66,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginVertical: 5,
     borderRadius: 5,
+    margin: 5,
   },
   buttonText: {
     color: "white",
