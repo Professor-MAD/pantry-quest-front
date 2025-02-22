@@ -150,7 +150,6 @@ const styles = StyleSheet.create({
 
     // 🔹 Android SHADOW
     elevation: 8,
-
     margin: 5,
   },
   buttonBackground: {
