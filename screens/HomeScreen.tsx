@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 
 export default function HomeScreen({ navigation }) {
   return (
@@ -13,6 +13,10 @@ export default function HomeScreen({ navigation }) {
             style={styles.button}
             onPress={() => navigation.navigate("Pantry")}
           >
+            <Image
+              source={require("../assets/pantry-mascot.png")}
+              style={styles.icon}
+            />
             <Text style={styles.buttonText}>Pantry</Text>
           </TouchableOpacity>
 
@@ -20,6 +24,10 @@ export default function HomeScreen({ navigation }) {
             style={styles.button}
             onPress={() => navigation.navigate("Grocery")}
           >
+            <Image
+              source={require("../assets/list-mascot.png")}
+              style={styles.icon}
+            />
             <Text style={styles.buttonText}>Grocery List</Text>
           </TouchableOpacity>
         </View>
@@ -30,6 +38,10 @@ export default function HomeScreen({ navigation }) {
             style={styles.button}
             onPress={() => navigation.navigate("Settings")}
           >
+            <Image
+              source={require("../assets/recipe-mascot.png")}
+              style={styles.icon}
+            />
             <Text style={styles.buttonText}>Settings</Text>
           </TouchableOpacity>
 
@@ -37,6 +49,10 @@ export default function HomeScreen({ navigation }) {
             style={styles.button}
             onPress={() => navigation.navigate("Recipe")}
           >
+            <Image
+              source={require("../assets/gear-mascot.png")}
+              style={styles.icon}
+            />
             <Text style={styles.buttonText}>Recipes</Text>
           </TouchableOpacity>
         </View>
@@ -93,5 +109,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
+    backgroundColor: "#f09296",
+    width: 150,
+    marginTop: 5,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+  },
+  icon: {
+    width: 90,
+    height: 100,
+    marginBottom: 0,
+    marginTop: 20,
   },
 });
