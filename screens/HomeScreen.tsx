@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 40,
     color: "#d9534f",
+    fontFamily: "Bellfoods",
   },
   mainContentContainer: {
     width: "100%",
