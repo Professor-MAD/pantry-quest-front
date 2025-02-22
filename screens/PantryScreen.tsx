@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import NavFooter from "@/components/NavFooter";
 
-export default function PantryScreen() {
+export default function PantryScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.pantryBackground}>
@@ -12,7 +12,7 @@ export default function PantryScreen() {
         />
       </View>
       <View style={styles.navFooter}>
-        <NavFooter />
+        <NavFooter navigation={navigation} />
       </View>
     </View>
   );
