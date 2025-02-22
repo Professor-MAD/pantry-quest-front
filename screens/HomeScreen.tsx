@@ -4,7 +4,17 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Pantry Quest</Text>
+      {/* Stacked Text for Outline Effect */}
+      <View style={styles.titleContainer}>
+        <Text
+          style={[styles.title, styles.titleOutline, { left: -2, top: -2 }]}
+        >
+          Pantry Quest
+        </Text>
+
+        {/* Main Text */}
+        <Text style={styles.title}>Pantry Quest</Text>
+      </View>
 
       <View style={styles.mainContentContainer}>
         {/* First Row */}
@@ -68,18 +78,35 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#e1ecc6",
   },
+  titleContainer: {
+    position: "relative",
+  },
   title: {
-    fontSize: 32,
-    fontWeight: "bold",
-    marginBottom: 40,
-    color: "#d9534f",
+    fontSize: 45,
+    fontWeight: "normal",
+    marginBottom: 10,
+    marginTop: 20,
+    color: "#ffffff",
     fontFamily: "Bellfoods",
+    textAlign: "center",
+
+    // 🔹 TEXT SHADOW
+    textShadowColor: "#f09296",
+    textShadowOffset: { width: 4, height: 4 },
+    textShadowRadius: 10,
+  },
+
+  titleOutline: {
+    position: "absolute",
+    fontSize: 45,
+    fontWeight: "normal",
+    fontFamily: "Bellfoods",
+    color: "#f09296", // Outline color (Same as button border)
   },
   mainContentContainer: {
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    // backgroundColor: "purple",
   },
   row: {
     flexDirection: "row",
@@ -87,7 +114,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     marginBottom: 15,
-    // backgroundColor: "red",
   },
   button: {
     width: 150,
@@ -98,16 +124,21 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     borderWidth: 3,
     borderColor: "#f09296",
+
+    // 🔹 iOS SHADOW
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 5,
+    shadowOffset: { width: 4, height: 4 }, // Stronger shadow
+    shadowOpacity: 0.3, // Increase opacity
+    shadowRadius: 5, // More blur
+
+    // 🔹 Android SHADOW
+    elevation: 8, // Higher elevation for more shadow
+
     margin: 5,
   },
   buttonText: {
     color: "white",
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",
     backgroundColor: "#f09296",
@@ -115,6 +146,12 @@ const styles = StyleSheet.create({
     marginTop: 5,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
+    fontFamily: "Bellfoods",
+    letterSpacing: 1.5,
+    // 🔹 TEXT SHADOW
+    textShadowColor: "#000",
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 5,
   },
   icon: {
     width: 90,
