@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import NavFooter from "@/components/NavFooter";
 
 export default function PantryScreen({ navigation }) {
@@ -11,6 +11,12 @@ export default function PantryScreen({ navigation }) {
           style={styles.pantryImage}
         />
       </View>
+      <TouchableOpacity style={styles.addButton}>
+        <Image
+          source={require("../assets/add-button.png")}
+          style={styles.icon}
+        />
+      </TouchableOpacity>
       <View style={styles.navFooter}>
         <NavFooter navigation={navigation} />
       </View>
@@ -25,10 +31,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#e1ecc6",
     width: "100%",
     height: "100%",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
   },
   pantryBackground: {
     flexGrow: 1,
@@ -48,5 +50,18 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 80,
     zIndex: 10,
+  },
+  addButton: {
+    position: "absolute",
+    bottom: 100,
+    alignSelf: "center",
+    width: 70,
+    height: 70,
+    zIndex: 20,
+  },
+  icon: {
+    width: 80,
+    height: 80,
+    resizeMode: "contain",
   },
 });
