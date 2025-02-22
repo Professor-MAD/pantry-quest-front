@@ -27,7 +27,9 @@ export default function HomeScreen({ navigation }) {
               source={require("../assets/pantry-mascot.png")}
               style={styles.icon}
             />
-            <Text style={styles.buttonText}>Pantry</Text>
+            <View style={styles.buttonBackground}>
+              <Text style={styles.buttonText}>Pantry</Text>
+            </View>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -38,7 +40,9 @@ export default function HomeScreen({ navigation }) {
               source={require("../assets/list-mascot.png")}
               style={styles.icon}
             />
-            <Text style={styles.buttonText}>Grocery List</Text>
+            <View style={styles.buttonBackground}>
+              <Text style={styles.buttonText}>Grocery List</Text>
+            </View>
           </TouchableOpacity>
         </View>
 
@@ -52,7 +56,9 @@ export default function HomeScreen({ navigation }) {
               source={require("../assets/recipe-mascot.png")}
               style={styles.icon}
             />
-            <Text style={styles.buttonText}>Settings</Text>
+            <View style={styles.buttonBackground}>
+              <Text style={styles.buttonText}>Settings</Text>
+            </View>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -63,9 +69,17 @@ export default function HomeScreen({ navigation }) {
               source={require("../assets/gear-mascot.png")}
               style={styles.icon}
             />
-            <Text style={styles.buttonText}>Recipes</Text>
+            <View style={styles.buttonBackground}>
+              <Text style={styles.buttonText}>Recipes</Text>
+            </View>
           </TouchableOpacity>
         </View>
+      </View>
+      <View>
+        <Image
+          source={require("../assets/pantry-quest-logo.png")}
+          style={styles.mainIcon}
+        />
       </View>
     </View>
   );
@@ -136,19 +150,25 @@ const styles = StyleSheet.create({
 
     margin: 5,
   },
+  buttonBackground: {
+    width: 150,
+    height: 35, // Adjust height for more coverage
+    backgroundColor: "rgba(240, 146, 150, 0.8)", // 🔹 Transparent Pink (RGBA)
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: -10, // 🔹 Moves background UP to overlap icon
+    marginBottom: 20,
+  },
+
   buttonText: {
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",
-    backgroundColor: "#f09296",
-    width: 150,
-    marginTop: 5,
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
     fontFamily: "Bellfoods",
     letterSpacing: 1.5,
-    // 🔹 TEXT SHADOW
     textShadowColor: "#000",
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 5,
@@ -157,6 +177,11 @@ const styles = StyleSheet.create({
     width: 90,
     height: 100,
     marginBottom: 0,
-    marginTop: 20,
+    marginTop: 50,
+  },
+  mainIcon: {
+    width: 100,
+    height: 100,
+    marginTop: 10,
   },
 });
