@@ -5,7 +5,6 @@ import Footer from "@/components/Footer";
 export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      {/* Stacked Text for Outline Effect */}
       <View style={styles.titleContainer}>
         <Text
           style={[styles.title, styles.titleOutline, { left: -2, top: -2 }]}
@@ -51,27 +50,27 @@ export default function HomeScreen({ navigation }) {
         <View style={styles.row}>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate("Settings")}
+            onPress={() => navigation.navigate("Recipes")}
           >
             <Image
               source={require("../assets/recipe-mascot.png")}
               style={styles.icon}
             />
             <View style={styles.buttonBackground}>
-              <Text style={styles.buttonText}>Settings</Text>
+              <Text style={styles.buttonText}>Recipes</Text>
             </View>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate("Recipe")}
+            onPress={() => navigation.navigate("Settings")}
           >
             <Image
               source={require("../assets/gear-mascot.png")}
               style={styles.icon}
             />
             <View style={styles.buttonBackground}>
-              <Text style={styles.buttonText}>Recipes</Text>
+              <Text style={styles.buttonText}>Settings</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -118,7 +117,7 @@ const styles = StyleSheet.create({
     fontSize: 45,
     fontWeight: "normal",
     fontFamily: "Bellfoods",
-    color: "#f09296", // Outline color (Same as button border)
+    color: "#f09296",
   },
   mainContentContainer: {
     width: "100%",
@@ -145,24 +144,24 @@ const styles = StyleSheet.create({
 
     // 🔹 iOS SHADOW
     shadowColor: "#000",
-    shadowOffset: { width: 4, height: 4 }, // Stronger shadow
-    shadowOpacity: 0.3, // Increase opacity
-    shadowRadius: 5, // More blur
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
 
     // 🔹 Android SHADOW
-    elevation: 8, // Higher elevation for more shadow
+    elevation: 8,
 
     margin: 5,
   },
   buttonBackground: {
     width: 150,
-    height: 35, // Adjust height for more coverage
-    backgroundColor: "rgba(240, 146, 150, 0.8)", // 🔹 Transparent Pink (RGBA)
+    height: 35,
+    backgroundColor: "rgba(240, 146, 150, 0.8)",
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: -10, // 🔹 Moves background UP to overlap icon
+    marginTop: -10,
     marginBottom: 20,
   },
 
@@ -184,17 +183,17 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   mainIconContainer: {
-    width: "100%", // Take full width
-    justifyContent: "center", // Center horizontally
-    alignItems: "center", // Center vertically
-    marginTop: 5, // More space from buttons
-    paddingVertical: 10, // Add vertical padding
-    backgroundColor: "transparent", // Remove debug color
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 5,
+    paddingVertical: 10,
+    backgroundColor: "transparent",
   },
 
   mainIcon: {
-    width: 100, // Increase size
-    height: 100, // Make it bigger
-    resizeMode: "contain", // Prevent cropping
+    width: 100,
+    height: 100,
+    resizeMode: "contain",
   },
 });
