@@ -75,7 +75,7 @@ export default function HomeScreen({ navigation }) {
           </TouchableOpacity>
         </View>
       </View>
-      <View>
+      <View style={styles.mainIconContainer}>
         <Image
           source={require("../assets/pantry-quest-logo.png")}
           style={styles.mainIcon}
@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   title: {
+    display: "none",
     fontSize: 45,
     fontWeight: "normal",
     marginBottom: 10,
@@ -121,6 +122,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
+    marginTop: 50,
   },
   row: {
     flexDirection: "row",
@@ -179,9 +181,18 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     marginTop: 50,
   },
+  mainIconContainer: {
+    width: "100%", // Take full width
+    justifyContent: "center", // Center horizontally
+    alignItems: "center", // Center vertically
+    marginTop: 5, // More space from buttons
+    paddingVertical: 10, // Add vertical padding
+    backgroundColor: "transparent", // Remove debug color
+  },
+
   mainIcon: {
-    width: 100,
-    height: 100,
-    marginTop: 10,
+    width: 100, // Increase size
+    height: 100, // Make it bigger
+    resizeMode: "contain", // Prevent cropping
   },
 });
