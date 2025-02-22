@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import Footer from "@/components/Footer";
 
 export default function HomeScreen({ navigation }) {
   return (
@@ -81,6 +82,7 @@ export default function HomeScreen({ navigation }) {
           style={styles.mainIcon}
         />
       </View>
+      <Footer></Footer>
     </View>
   );
 }
