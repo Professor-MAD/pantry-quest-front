@@ -59,7 +59,7 @@ export default function PantryScreen({ navigation }) {
 
         {/* Show Selected Food */}
         {selectedFood && (
-          <Text style={styles.selectedFood}>Selected: {selectedFood}</Text>
+          <Text style={styles.selectedFoodText}>Selected: {selectedFood}</Text>
         )}
 
         {/* Add Button */}
@@ -148,7 +148,10 @@ const styles = StyleSheet.create({
     height: 80,
     resizeMode: "contain",
   },
+  selectedFoodText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#f09296",
+    marginTop: 10,
+  },
 });
-
-// backgroundColor: "#f9d4ba",  borderWidth: 3,
-// borderColor: "#f09296",
