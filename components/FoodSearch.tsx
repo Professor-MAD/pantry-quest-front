@@ -70,18 +70,31 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     borderRadius: 5,
+    fontFamily: "Bellfoods",
   },
   scrollContainer: {
-    maxHeight: 300, // ✅ Limits the height of the scrollable area
+    maxHeight: 300,
   },
   foodButton: {
     padding: 15,
     backgroundColor: "#FFA500",
     marginVertical: 5,
     borderRadius: 5,
+    width: "90%",
+    // 🔹 iOS SHADOW
+    shadowColor: "#000",
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+
+    // 🔹 Android SHADOW
+    elevation: 8,
+    margin: 5,
   },
   foodText: {
     color: "white",
-    fontWeight: "bold",
+    fontFamily: "Bellfoods",
+    fontWeight: "normal",
+    fontSize: 20,
   },
 });

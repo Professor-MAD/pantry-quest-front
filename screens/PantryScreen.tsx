@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import NavFooter from "@/components/NavFooter";
 import AddButtons from "@/components/AddButtons";
 import FoodSearch from "@/components/FoodSearch";
@@ -10,59 +18,67 @@ export default function PantryScreen({ navigation }) {
   const [selectedFood, setSelectedFood] = useState(null);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.pantryBackground}>
-        <Image
-          source={require("../assets/pantry-background.png")}
-          style={styles.pantryImage}
-        />
-      </View>
-
-      {/* Toggle Add Options */}
-      {showAddOptions && (
-        <View style={styles.addButtonOptions}>
-          <AddButtons
-            onTypeIn={() => {
-              setShowFoodSearch(true); // Show food search
-              setShowAddOptions(false); // Hide add options
-            }}
+    <TouchableWithoutFeedback
+      onPress={() => {
+        setShowFoodSearch(false); // Hide food search
+        setShowAddOptions(false); // Hide add options
+        Keyboard.dismiss(); // Hide keyboard
+      }}
+    >
+      <View style={styles.container}>
+        <View style={styles.pantryBackground}>
+          <Image
+            source={require("../assets/pantry-background.png")}
+            style={styles.pantryImage}
           />
         </View>
-      )}
 
-      {/* Show Food Search when "Type In" is clicked */}
-      {showFoodSearch && (
-        <View style={styles.foodSearchContainer}>
-          <FoodSearch
-            onSelectFood={(food) => {
-              setSelectedFood(food); // Store selected food
-              setShowFoodSearch(false); // Hide search after selection
-            }}
+        {/* Show Add Options when Add Button is clicked */}
+        {showAddOptions && (
+          <View style={styles.addButtonOptions}>
+            <AddButtons
+              onTypeIn={() => {
+                setShowFoodSearch(true);
+                setShowAddOptions(false);
+              }}
+            />
+          </View>
+        )}
+
+        {/* Show Food Search when "Type In" is clicked */}
+        {showFoodSearch && (
+          <View style={styles.foodSearchContainer}>
+            <FoodSearch
+              onSelectFood={(food) => {
+                setSelectedFood(food);
+                setShowFoodSearch(false);
+              }}
+            />
+          </View>
+        )}
+
+        {/* Show Selected Food */}
+        {selectedFood && (
+          <Text style={styles.selectedFood}>Selected: {selectedFood}</Text>
+        )}
+
+        {/* Add Button */}
+        <TouchableOpacity
+          style={styles.addButton}
+          onPress={() => setShowAddOptions((prev) => !prev)}
+        >
+          <Image
+            source={require("../assets/add-button.png")}
+            style={styles.icon}
           />
+        </TouchableOpacity>
+
+        {/* Footer */}
+        <View style={styles.navFooter}>
+          <NavFooter navigation={navigation} />
         </View>
-      )}
-
-      {/* Show Selected Food */}
-      {selectedFood && (
-        <Text style={styles.selectedFood}>Selected: {selectedFood}</Text>
-      )}
-
-      {/* Add Button */}
-      <TouchableOpacity
-        style={styles.addButton}
-        onPress={() => setShowAddOptions((prev) => !prev)}
-      >
-        <Image
-          source={require("../assets/add-button.png")}
-          style={styles.icon}
-        />
-      </TouchableOpacity>
-
-      {/* Footer */}
-      <View style={styles.navFooter}>
-        <NavFooter navigation={navigation} />
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -119,7 +135,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     elevation: 5,
     zIndex: 100,
-    overflow: "hidden",
+    resizeMode: "contain",
     borderWidth: 3,
     borderColor: "#f09296",
   },
@@ -133,3 +149,6 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
 });
+
+// backgroundColor: "#f9d4ba",  borderWidth: 3,
+// borderColor: "#f09296",
