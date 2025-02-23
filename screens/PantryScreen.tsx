@@ -22,24 +22,40 @@ export default function PantryScreen({ navigation }) {
       Bread: require("../assets/bread.png"),
     };
 
-    // If the food name exists in the images object, return the image.
-    // Otherwise, return a fallback image (one of your existing images for now).
     return images[foodName] || require("../assets/apple.png");
   };
 
   const handlePanResponder = (id) => {
     return PanResponder.create({
-      onMoveShouldSetPanResponder: () => true,
+      onStartShouldSetPanResponder: () => true,
       onPanResponderMove: (_, gesture) => {
         setPantryItems((prevItems) =>
           prevItems.map((item) =>
             item.id === id
-              ? { ...item, x: gesture.moveX, y: gesture.moveY }
+              ? {
+                  ...item,
+                  x: item.x + gesture.dx, // Moves relative to initial position
+                  y: item.y + gesture.dy,
+                }
               : item
           )
         );
       },
     });
+  };
+
+  const addFoodToPantry = (food) => {
+    setPantryItems((prev) => [
+      ...prev,
+      {
+        id: Date.now(),
+        name: food,
+        source: getFoodImage(food),
+        x: 100 + prev.length * 20, // Ensures new foods don't stack exactly on top
+        y: 200,
+      },
+    ]);
+    setShowFoodSearch(false);
   };
 
   return (
@@ -64,33 +80,22 @@ export default function PantryScreen({ navigation }) {
 
       {showFoodSearch && (
         <View style={styles.foodSearchContainer}>
-          <FoodSearch
-            onSelectFood={(food) => {
-              setPantryItems((prev) => [
-                ...prev,
-                {
-                  id: Date.now(),
-                  name: food,
-                  source: getFoodImage(food),
-                  x: 50,
-                  y: 50,
-                },
-              ]);
-              setShowFoodSearch(false);
-            }}
-          />
+          <FoodSearch onSelectFood={addFoodToPantry} />
         </View>
       )}
 
-      {pantryItems.map((item) => (
-        <View
-          key={item.id}
-          {...handlePanResponder(item.id).panHandlers}
-          style={[styles.pantryItem, { top: item.y, left: item.x }]}
-        >
-          <Image source={item.source} style={styles.foodImage} />
-        </View>
-      ))}
+      {pantryItems.map((item) => {
+        const panResponder = handlePanResponder(item.id);
+        return (
+          <View
+            key={item.id}
+            {...panResponder.panHandlers}
+            style={[styles.pantryItem, { top: item.y, left: item.x }]}
+          >
+            <Image source={item.source} style={styles.foodImage} />
+          </View>
+        );
+      })}
 
       <TouchableOpacity
         style={styles.addButton}
