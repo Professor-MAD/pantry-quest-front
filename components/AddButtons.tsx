@@ -1,11 +1,11 @@
 import React from "react";
 import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 
-export default function AddButtons() {
+export default function AddButtons({ onTypeIn }) {
   return (
     <View style={styles.container}>
       <View style={styles.iconRow}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onTypeIn}>
           <Image
             source={require("../assets/type-button.png")}
             style={styles.sideIcons}
@@ -30,13 +30,11 @@ export default function AddButtons() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "flex-start",
+    justifyContent: "center",
     alignItems: "center",
     height: "100%",
   },
   iconRow: {
-    flex: 1,
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
@@ -48,13 +46,11 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     resizeMode: "contain",
-    // marginLeft: 5,
   },
   sideIcons: {
     marginTop: 20,
     width: 40,
     height: 40,
     resizeMode: "contain",
-    // marginLeft: 5,
   },
 });

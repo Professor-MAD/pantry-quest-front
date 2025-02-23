@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import NavFooter from "@/components/NavFooter";
 import AddButtons from "@/components/AddButtons";
+import FoodSearch from "@/components/FoodSearch";
 
 export default function PantryScreen({ navigation }) {
   const [showAddOptions, setShowAddOptions] = useState(false);
+  const [showFoodSearch, setShowFoodSearch] = useState(false);
+  const [selectedFood, setSelectedFood] = useState(null);
 
   return (
     <View style={styles.container}>
@@ -15,12 +18,36 @@ export default function PantryScreen({ navigation }) {
         />
       </View>
 
+      {/* Toggle Add Options */}
       {showAddOptions && (
         <View style={styles.addButtonOptions}>
-          <AddButtons />
+          <AddButtons
+            onTypeIn={() => {
+              setShowFoodSearch(true); // Show food search
+              setShowAddOptions(false); // Hide add options
+            }}
+          />
         </View>
       )}
 
+      {/* Show Food Search when "Type In" is clicked */}
+      {showFoodSearch && (
+        <View style={styles.foodSearchContainer}>
+          <FoodSearch
+            onSelectFood={(food) => {
+              setSelectedFood(food); // Store selected food
+              setShowFoodSearch(false); // Hide search after selection
+            }}
+          />
+        </View>
+      )}
+
+      {/* Show Selected Food */}
+      {selectedFood && (
+        <Text style={styles.selectedFood}>Selected: {selectedFood}</Text>
+      )}
+
+      {/* Add Button */}
       <TouchableOpacity
         style={styles.addButton}
         onPress={() => setShowAddOptions((prev) => !prev)}
@@ -30,6 +57,8 @@ export default function PantryScreen({ navigation }) {
           style={styles.icon}
         />
       </TouchableOpacity>
+
+      {/* Footer */}
       <View style={styles.navFooter}>
         <NavFooter navigation={navigation} />
       </View>
@@ -79,6 +108,24 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 50,
     zIndex: 20,
+  },
+  foodSearchContainer: {
+    position: "absolute",
+    top: "40%",
+    width: "80%",
+    height: "50%",
+    backgroundColor: "#f9d4ba",
+    padding: 15,
+    borderRadius: 10,
+    elevation: 5,
+    zIndex: 100,
+    overflow: "hidden",
+    borderWidth: 3,
+    borderColor: "#f09296",
+  },
+  selectedFood: {
+    fontSize: 18,
+    marginTop: 10,
   },
   icon: {
     width: 80,
