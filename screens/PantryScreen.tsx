@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import NavFooter from "@/components/NavFooter";
 import AddButtons from "@/components/AddButtons";
 
 export default function PantryScreen({ navigation }) {
+  const [showAddOptions, setShowAddOptions] = useState(false);
+
   return (
     <View style={styles.container}>
       <View style={styles.pantryBackground}>
@@ -12,10 +14,17 @@ export default function PantryScreen({ navigation }) {
           style={styles.pantryImage}
         />
       </View>
-      <View style={styles.addButtonOptions}>
-        <AddButtons />
-      </View>
-      <TouchableOpacity style={styles.addButton}>
+
+      {showAddOptions && (
+        <View style={styles.addButtonOptions}>
+          <AddButtons />
+        </View>
+      )}
+
+      <TouchableOpacity
+        style={styles.addButton}
+        onPress={() => setShowAddOptions((prev) => !prev)}
+      >
         <Image
           source={require("../assets/add-button.png")}
           style={styles.icon}
