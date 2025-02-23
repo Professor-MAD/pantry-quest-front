@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import {
   View,
-  Text,
-  StyleSheet,
   Image,
   TouchableOpacity,
-  TouchableWithoutFeedback,
-  Keyboard,
+  PanResponder,
+  StyleSheet,
 } from "react-native";
 import NavFooter from "@/components/NavFooter";
 import AddButtons from "@/components/AddButtons";
@@ -15,76 +13,105 @@ import FoodSearch from "@/components/FoodSearch";
 export default function PantryScreen({ navigation }) {
   const [showAddOptions, setShowAddOptions] = useState(false);
   const [showFoodSearch, setShowFoodSearch] = useState(false);
-  const [selectedFood, setSelectedFood] = useState(null);
+  const [pantryItems, setPantryItems] = useState([]);
+
+  const getFoodImage = (foodName) => {
+    const images = {
+      Apple: require("../assets/apple.png"),
+      Carrot: require("../assets/carrot.png"),
+      Bread: require("../assets/bread.png"),
+    };
+
+    // If the food name exists in the images object, return the image.
+    // Otherwise, return a fallback image (one of your existing images for now).
+    return images[foodName] || require("../assets/apple.png");
+  };
+
+  const handlePanResponder = (id) => {
+    return PanResponder.create({
+      onMoveShouldSetPanResponder: () => true,
+      onPanResponderMove: (_, gesture) => {
+        setPantryItems((prevItems) =>
+          prevItems.map((item) =>
+            item.id === id
+              ? { ...item, x: gesture.moveX, y: gesture.moveY }
+              : item
+          )
+        );
+      },
+    });
+  };
 
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        setShowFoodSearch(false); // Hide food search
-        setShowAddOptions(false); // Hide add options
-        Keyboard.dismiss(); // Hide keyboard
-      }}
-    >
-      <View style={styles.container}>
-        <View style={styles.pantryBackground}>
-          <Image
-            source={require("../assets/pantry-background.png")}
-            style={styles.pantryImage}
-          />
-        </View>
-
-        {/* Show Add Options when Add Button is clicked */}
-        {showAddOptions && (
-          <View style={styles.addButtonOptions}>
-            <AddButtons
-              onTypeIn={() => {
-                setShowFoodSearch(true);
-                setShowAddOptions(false);
-              }}
-            />
-          </View>
-        )}
-
-        {/* Show Food Search when "Type In" is clicked */}
-        {showFoodSearch && (
-          <View style={styles.foodSearchContainer}>
-            <FoodSearch
-              onSelectFood={(food) => {
-                setSelectedFood(food);
-                setShowFoodSearch(false);
-              }}
-            />
-          </View>
-        )}
-
-        {/* Show Selected Food */}
-        {selectedFood && (
-          <Text style={styles.selectedFoodText}>Selected: {selectedFood}</Text>
-        )}
-
-        {/* Add Button */}
-        <TouchableOpacity
-          style={styles.addButton}
-          onPress={() => setShowAddOptions((prev) => !prev)}
-        >
-          <Image
-            source={require("../assets/add-button.png")}
-            style={styles.icon}
-          />
-        </TouchableOpacity>
-
-        {/* Footer */}
-        <View style={styles.navFooter}>
-          <NavFooter navigation={navigation} />
-        </View>
+    <View style={styles.container}>
+      <View style={styles.pantryBackground}>
+        <Image
+          source={require("../assets/pantry-background.png")}
+          style={styles.pantryImage}
+        />
       </View>
-    </TouchableWithoutFeedback>
+
+      {showAddOptions && (
+        <View style={styles.addButtonOptions}>
+          <AddButtons
+            onTypeIn={() => {
+              setShowFoodSearch(true);
+              setShowAddOptions(false);
+            }}
+          />
+        </View>
+      )}
+
+      {showFoodSearch && (
+        <View style={styles.foodSearchContainer}>
+          <FoodSearch
+            onSelectFood={(food) => {
+              setPantryItems((prev) => [
+                ...prev,
+                {
+                  id: Date.now(),
+                  name: food,
+                  source: getFoodImage(food),
+                  x: 50,
+                  y: 50,
+                },
+              ]);
+              setShowFoodSearch(false);
+            }}
+          />
+        </View>
+      )}
+
+      {pantryItems.map((item) => (
+        <View
+          key={item.id}
+          {...handlePanResponder(item.id).panHandlers}
+          style={[styles.pantryItem, { top: item.y, left: item.x }]}
+        >
+          <Image source={item.source} style={styles.foodImage} />
+        </View>
+      ))}
+
+      <TouchableOpacity
+        style={styles.addButton}
+        onPress={() => setShowAddOptions((prev) => !prev)}
+      >
+        <Image
+          source={require("../assets/add-button.png")}
+          style={styles.icon}
+        />
+      </TouchableOpacity>
+
+      <View style={styles.navFooter}>
+        <NavFooter navigation={navigation} />
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "flex-start",
+    flex: 1,
     alignItems: "center",
     backgroundColor: "#e1ecc6",
     width: "100%",
@@ -92,10 +119,8 @@ const styles = StyleSheet.create({
   },
   pantryBackground: {
     flexGrow: 1,
-    justifyContent: "flex-start",
     alignItems: "center",
     width: "100%",
-    backgroundColor: "#e1ecc6",
     height: "100%",
   },
   pantryImage: {
@@ -135,23 +160,22 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     elevation: 5,
     zIndex: 100,
-    resizeMode: "contain",
     borderWidth: 3,
     borderColor: "#f09296",
   },
-  selectedFood: {
-    fontSize: 18,
-    marginTop: 10,
+  pantryItem: {
+    position: "absolute",
+    width: 60,
+    height: 60,
+  },
+  foodImage: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "contain",
   },
   icon: {
     width: 80,
     height: 80,
     resizeMode: "contain",
-  },
-  selectedFoodText: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#f09296",
-    marginTop: 10,
   },
 });

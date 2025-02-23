@@ -11,7 +11,6 @@ import {
 const mockFoodItems = [
   "Apple",
   "Banana",
-  "Bread",
   "Carrot",
   "Cheese",
   "Chicken",
@@ -43,10 +42,7 @@ export default function FoodSearch({ onSelectFood }) {
         value={searchQuery}
         onChangeText={setSearchQuery}
       />
-      <ScrollView
-        style={styles.scrollContainer}
-        showsVerticalScrollIndicator={true}
-      >
+      <ScrollView style={styles.scrollContainer}>
         {filteredItems.map((food, index) => (
           <TouchableOpacity
             key={index}
@@ -81,21 +77,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFA500",
     marginVertical: 5,
     borderRadius: 5,
-    width: "90%",
-    // 🔹 iOS SHADOW
-    shadowColor: "#000",
-    shadowOffset: { width: 4, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-
-    // 🔹 Android SHADOW
-    elevation: 8,
-    margin: 5,
   },
   foodText: {
     color: "white",
+    fontWeight: "bold",
     fontFamily: "Bellfoods",
-    fontWeight: "normal",
     fontSize: 20,
   },
 });
