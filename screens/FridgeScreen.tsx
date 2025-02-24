@@ -21,6 +21,11 @@ export default function FridgeScreen({ navigation }) {
       Apple: require("../assets/apple.png"),
       Carrot: require("../assets/carrot.png"),
       Bread: require("../assets/bread.png"),
+      Banana: require("../assets/banana.png"),
+      Cheese: require("../assets/cheese.png"),
+      Chicken: require("../assets/chicken.png"),
+      Eggs: require("../assets/eggs.png"),
+      Fish: require("../assets/fish.png"),
     };
     return images[foodName] || require("../assets/apple.png");
   };
@@ -117,6 +122,16 @@ export default function FridgeScreen({ navigation }) {
         );
       })}
 
+      <TouchableOpacity
+        style={styles.leftArrowButton}
+        onPress={() => navigation.navigate("Pantry")}
+      >
+        <Image
+          source={require("../assets/left-arrow.png")}
+          style={styles.arrowIcon}
+        />
+      </TouchableOpacity>
+
       {/* Add Button */}
       <TouchableOpacity
         style={styles.addButton}
@@ -203,6 +218,19 @@ const styles = StyleSheet.create({
   icon: {
     width: 80,
     height: 80,
+    resizeMode: "contain",
+  },
+  leftArrowButton: {
+    position: "absolute",
+    left: 20,
+    top: "50%",
+    width: 50,
+    height: 50,
+    zIndex: 30,
+  },
+  arrowIcon: {
+    width: "100%",
+    height: "100%",
     resizeMode: "contain",
   },
 });
