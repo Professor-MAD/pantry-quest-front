@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   View,
   Image,
@@ -15,46 +15,66 @@ export default function PantryScreen({ navigation }) {
   const [showFoodSearch, setShowFoodSearch] = useState(false);
   const [pantryItems, setPantryItems] = useState([]);
 
+  // Food Image Getter
   const getFoodImage = (foodName) => {
     const images = {
       Apple: require("../assets/apple.png"),
       Carrot: require("../assets/carrot.png"),
       Bread: require("../assets/bread.png"),
     };
-
     return images[foodName] || require("../assets/apple.png");
   };
 
-  const handlePanResponder = (id) => {
+  // useRef to track PanResponder positions
+  const pantryRefs = useRef({});
+
+  const createPanResponder = (id) => {
+    if (!pantryRefs.current[id]) {
+      pantryRefs.current[id] = { x: 100, y: 200 };
+    }
+
     return PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onPanResponderMove: (_, gesture) => {
+        pantryRefs.current[id] = {
+          x: pantryRefs.current[id].x + gesture.dx,
+          y: pantryRefs.current[id].y + gesture.dy,
+        };
+
         setPantryItems((prevItems) =>
           prevItems.map((item) =>
             item.id === id
               ? {
                   ...item,
-                  x: item.x + gesture.dx, // Moves relative to initial position
-                  y: item.y + gesture.dy,
+                  x: pantryRefs.current[id].x,
+                  y: pantryRefs.current[id].y,
                 }
               : item
           )
         );
       },
+      onPanResponderRelease: () => {
+        // Flatten offsets to prevent weird jumps
+      },
     });
   };
 
+  // Add food to pantry
   const addFoodToPantry = (food) => {
+    const id = Date.now();
+    pantryRefs.current[id] = { x: 100 + pantryItems.length * 20, y: 200 };
+
     setPantryItems((prev) => [
       ...prev,
       {
-        id: Date.now(),
+        id,
         name: food,
         source: getFoodImage(food),
-        x: 100 + prev.length * 20, // Ensures new foods don't stack exactly on top
-        y: 200,
+        x: pantryRefs.current[id].x,
+        y: pantryRefs.current[id].y,
       },
     ]);
+
     setShowFoodSearch(false);
   };
 
@@ -67,6 +87,7 @@ export default function PantryScreen({ navigation }) {
         />
       </View>
 
+      {/* Show Add Options */}
       {showAddOptions && (
         <View style={styles.addButtonOptions}>
           <AddButtons
@@ -78,14 +99,16 @@ export default function PantryScreen({ navigation }) {
         </View>
       )}
 
+      {/* Show Food Search */}
       {showFoodSearch && (
         <View style={styles.foodSearchContainer}>
           <FoodSearch onSelectFood={addFoodToPantry} />
         </View>
       )}
 
+      {/* Display Pantry Items */}
       {pantryItems.map((item) => {
-        const panResponder = handlePanResponder(item.id);
+        const panResponder = createPanResponder(item.id);
         return (
           <View
             key={item.id}
@@ -97,6 +120,7 @@ export default function PantryScreen({ navigation }) {
         );
       })}
 
+      {/* Add Button */}
       <TouchableOpacity
         style={styles.addButton}
         onPress={() => setShowAddOptions((prev) => !prev)}
@@ -107,6 +131,7 @@ export default function PantryScreen({ navigation }) {
         />
       </TouchableOpacity>
 
+      {/* Footer */}
       <View style={styles.navFooter}>
         <NavFooter navigation={navigation} />
       </View>

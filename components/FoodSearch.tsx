@@ -11,6 +11,7 @@ import {
 const mockFoodItems = [
   "Apple",
   "Banana",
+  "Bread",
   "Carrot",
   "Cheese",
   "Chicken",
