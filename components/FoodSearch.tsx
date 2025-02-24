@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   },
   foodText: {
     color: "white",
-    fontWeight: "bold",
+    fontWeight: "normal",
     fontFamily: "Bellfoods",
     fontSize: 20,
   },
