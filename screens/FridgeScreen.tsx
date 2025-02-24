@@ -10,10 +10,10 @@ import NavFooter from "@/components/NavFooter";
 import AddButtons from "@/components/AddButtons";
 import FoodSearch from "@/components/FoodSearch";
 
-export default function PantryScreen({ navigation }) {
+export default function FridgeScreen({ navigation }) {
   const [showAddOptions, setShowAddOptions] = useState(false);
   const [showFoodSearch, setShowFoodSearch] = useState(false);
-  const [pantryItems, setPantryItems] = useState([]);
+  const [fridgeItems, setFridgeItems] = useState([]);
 
   // Food Image Getter
   const getFoodImage = (foodName) => {
@@ -26,52 +26,49 @@ export default function PantryScreen({ navigation }) {
   };
 
   // useRef to track PanResponder positions
-  const pantryRefs = useRef({});
+  const fridgeRefs = useRef({});
 
   const createPanResponder = (id) => {
-    if (!pantryRefs.current[id]) {
-      pantryRefs.current[id] = { x: 100, y: 200 };
+    if (!fridgeRefs.current[id]) {
+      fridgeRefs.current[id] = { x: 100, y: 200 };
     }
 
     return PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onPanResponderMove: (_, gesture) => {
-        pantryRefs.current[id] = {
-          x: pantryRefs.current[id].x + gesture.dx,
-          y: pantryRefs.current[id].y + gesture.dy,
+        fridgeRefs.current[id] = {
+          x: fridgeRefs.current[id].x + gesture.dx,
+          y: fridgeRefs.current[id].y + gesture.dy,
         };
 
-        setPantryItems((prevItems) =>
+        setFridgeItems((prevItems) =>
           prevItems.map((item) =>
             item.id === id
               ? {
                   ...item,
-                  x: pantryRefs.current[id].x,
-                  y: pantryRefs.current[id].y,
+                  x: fridgeRefs.current[id].x,
+                  y: fridgeRefs.current[id].y,
                 }
               : item
           )
         );
       },
-      onPanResponderRelease: () => {
-        // Flatten offsets to prevent weird jumps
-      },
     });
   };
 
-  // Add food to pantry
-  const addFoodToPantry = (food) => {
+  // Add food to fridge
+  const addFoodToFridge = (food) => {
     const id = Date.now();
-    pantryRefs.current[id] = { x: 100 + pantryItems.length * 20, y: 200 };
+    fridgeRefs.current[id] = { x: 100 + fridgeItems.length * 20, y: 200 };
 
-    setPantryItems((prev) => [
+    setFridgeItems((prev) => [
       ...prev,
       {
         id,
         name: food,
         source: getFoodImage(food),
-        x: pantryRefs.current[id].x,
-        y: pantryRefs.current[id].y,
+        x: fridgeRefs.current[id].x,
+        y: fridgeRefs.current[id].y,
       },
     ]);
 
@@ -80,10 +77,10 @@ export default function PantryScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.pantryBackground}>
+      <View style={styles.fridgeBackground}>
         <Image
-          source={require("../assets/pantry-background.png")}
-          style={styles.pantryImage}
+          source={require("../assets/fridge.png")}
+          style={styles.fridgeImage}
         />
       </View>
 
@@ -102,33 +99,23 @@ export default function PantryScreen({ navigation }) {
       {/* Show Food Search */}
       {showFoodSearch && (
         <View style={styles.foodSearchContainer}>
-          <FoodSearch onSelectFood={addFoodToPantry} />
+          <FoodSearch onSelectFood={addFoodToFridge} />
         </View>
       )}
 
-      {/* Display Pantry Items */}
-      {pantryItems.map((item) => {
+      {/* Display Fridge Items */}
+      {fridgeItems.map((item) => {
         const panResponder = createPanResponder(item.id);
         return (
           <View
             key={item.id}
             {...panResponder.panHandlers}
-            style={[styles.pantryItem, { top: item.y, left: item.x }]}
+            style={[styles.fridgeItem, { top: item.y, left: item.x }]}
           >
             <Image source={item.source} style={styles.foodImage} />
           </View>
         );
       })}
-
-      <TouchableOpacity
-        style={styles.rightArrowButton}
-        onPress={() => navigation.navigate("Fridge")}
-      >
-        <Image
-          source={require("../assets/right-arrow.png")}
-          style={styles.arrowIcon}
-        />
-      </TouchableOpacity>
 
       {/* Add Button */}
       <TouchableOpacity
@@ -153,17 +140,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#e1ecc6",
+    backgroundColor: "#d0e1f9", // Change to a light blue for fridge
     width: "100%",
     height: "100%",
   },
-  pantryBackground: {
+  fridgeBackground: {
     flexGrow: 1,
     alignItems: "center",
     width: "100%",
     height: "100%",
   },
-  pantryImage: {
+  fridgeImage: {
     width: "100%",
     height: "100%",
   },
@@ -195,15 +182,15 @@ const styles = StyleSheet.create({
     top: "40%",
     width: "80%",
     height: "50%",
-    backgroundColor: "#f9d4ba",
+    backgroundColor: "#d0e1f9",
     padding: 15,
     borderRadius: 10,
     elevation: 5,
     zIndex: 100,
     borderWidth: 3,
-    borderColor: "#f09296",
+    borderColor: "#4a90e2",
   },
-  pantryItem: {
+  fridgeItem: {
     position: "absolute",
     width: 60,
     height: 60,
@@ -216,19 +203,6 @@ const styles = StyleSheet.create({
   icon: {
     width: 80,
     height: 80,
-    resizeMode: "contain",
-  },
-  rightArrowButton: {
-    position: "absolute",
-    right: 20,
-    top: "50%",
-    width: 50,
-    height: 50,
-    zIndex: 30,
-  },
-  arrowIcon: {
-    width: "100%",
-    height: "100%",
     resizeMode: "contain",
   },
 });

@@ -9,6 +9,7 @@ import SettingsScreen from "./screens/SettingsScreen";
 import RecipeScreen from "./screens/RecipeScreen";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
+import FridgeScreen from "./screens/FridgeScreen";
 
 const Stack = createStackNavigator();
 
@@ -38,6 +39,7 @@ export default function App() {
           <Stack.Screen name="Grocery" component={GroceryListScreen} />
           <Stack.Screen name="Settings" component={SettingsScreen} />
           <Stack.Screen name="Recipes" component={RecipeScreen} />
+          <Stack.Screen name="Fridge" component={FridgeScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>
