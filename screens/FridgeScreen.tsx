@@ -1,8 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   View,
   Image,
   TouchableOpacity,
+  Animated,
   PanResponder,
   StyleSheet,
 } from "react-native";
@@ -14,6 +15,30 @@ export default function FridgeScreen({ navigation }) {
   const [showAddOptions, setShowAddOptions] = useState(false);
   const [showFoodSearch, setShowFoodSearch] = useState(false);
   const [fridgeItems, setFridgeItems] = useState([]);
+
+  // **🔹 Animated Value for Horizontal Pivoting**
+  const arrowPosition = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    const animateArrow = () => {
+      Animated.loop(
+        Animated.sequence([
+          Animated.timing(arrowPosition, {
+            toValue: 5,
+            duration: 400,
+            useNativeDriver: true,
+          }),
+          Animated.timing(arrowPosition, {
+            toValue: 0,
+            duration: 400,
+            useNativeDriver: true,
+          }),
+        ])
+      ).start();
+    };
+
+    animateArrow();
+  }, []);
 
   // Food Image Getter
   const getFoodImage = (foodName) => {
@@ -126,10 +151,17 @@ export default function FridgeScreen({ navigation }) {
         style={styles.leftArrowButton}
         onPress={() => navigation.navigate("Pantry")}
       >
-        <Image
-          source={require("../assets/left-arrow.png")}
-          style={styles.arrowIcon}
-        />
+        <Animated.View
+          style={[
+            styles.arrowContainer,
+            { transform: [{ translateX: arrowPosition }] }, // Moves left and right
+          ]}
+        >
+          <Image
+            source={require("../assets/left-arrow.png")}
+            style={styles.arrowIcon}
+          />
+        </Animated.View>
       </TouchableOpacity>
 
       {/* Add Button */}
@@ -227,6 +259,10 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     zIndex: 30,
+  },
+  arrowContainer: {
+    width: "100%",
+    height: "100%",
   },
   arrowIcon: {
     width: "100%",

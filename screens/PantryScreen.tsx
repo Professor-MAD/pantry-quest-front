@@ -44,8 +44,13 @@ export default function PantryScreen({ navigation }) {
   const getFoodImage = (foodName) => {
     const images = {
       Apple: require("../assets/apple.png"),
-      Carrot: require("../assets/carrot.png"),
+      Banana: require("../assets/banana.png"),
       Bread: require("../assets/bread.png"),
+      Carrot: require("../assets/carrot.png"),
+      Cheese: require("../assets/cheese.png"),
+      Chicken: require("../assets/chicken.png"),
+      Eggs: require("../assets/eggs.png"),
+      Fish: require("../assets/fish.png"),
     };
     return images[foodName] || require("../assets/apple.png");
   };
