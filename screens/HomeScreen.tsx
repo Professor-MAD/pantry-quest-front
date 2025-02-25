@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import Footer from "@/components/Footer";
 import AccountInfo from "@/components/AccountInfo";
@@ -232,11 +233,15 @@ const styles = StyleSheet.create({
     left: 130,
   },
   accountInfoContainer: {
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
+    position: "absolute",
+    top: "5%", // Centers it vertically
+    left: "5%", // Centers it horizontally
+    backgroundColor: "transparent", // 🔹 Slight transparency
+    zIndex: 250,
+    height: "90%",
+    width: "90%",
+    borderRadius: 40,
+    justifyContent: "center", // 🔹 Ensures child elements are centered
     alignItems: "center",
   },
 });
