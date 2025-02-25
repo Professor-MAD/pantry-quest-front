@@ -207,7 +207,10 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   chefImage: {
-    width: 100,
-    height: 100,
+    width: 40,
+    height: 40,
+    position: "absolute",
+    top: 10,
+    left: 130,
   },
 });
