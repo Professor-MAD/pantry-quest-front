@@ -14,97 +14,104 @@ export default function HomeScreen({ navigation }) {
   const [showAccountInfoModal, setShowAccountInfoModal] = useState(false);
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={() => setShowAccountInfoModal(true)}>
-        <Image
-          style={styles.chefImage}
-          source={require("../assets/user-info-finished-copy.png")}
-        />
-      </TouchableOpacity>
-      {showAccountInfoModal && (
-        <View style={styles.accountInfoContainer}>
-          <AccountInfo />
-        </View>
-      )}
+    <TouchableWithoutFeedback
+      onPress={() => {
+        setShowAccountInfoModal(false);
+        Keyboard.dismiss();
+      }}
+    >
+      <View style={styles.container}>
+        <TouchableOpacity onPress={() => setShowAccountInfoModal(true)}>
+          <Image
+            style={styles.chefImage}
+            source={require("../assets/user-info-finished-copy.png")}
+          />
+        </TouchableOpacity>
+        {showAccountInfoModal && (
+          <View style={styles.accountInfoContainer}>
+            <AccountInfo />
+          </View>
+        )}
 
-      <View style={styles.titleContainer}>
-        <Text
-          style={[styles.title, styles.titleOutline, { left: -2, top: -2 }]}
-        >
-          Pantry Quest
-        </Text>
-
-        {/* Main Text */}
-        <Text style={styles.title}>Pantry Quest</Text>
-      </View>
-
-      <View style={styles.mainContentContainer}>
-        {/* First Row */}
-        <View style={styles.row}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate("Pantry")}
+        <View style={styles.titleContainer}>
+          <Text
+            style={[styles.title, styles.titleOutline, { left: -2, top: -2 }]}
           >
-            <Image
-              source={require("../assets/pantry-mascot.png")}
-              style={styles.icon}
-            />
-            <View style={styles.buttonBackground}>
-              <Text style={styles.buttonText}>Pantry</Text>
-            </View>
-          </TouchableOpacity>
+            Pantry Quest
+          </Text>
 
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate("Grocery")}
-          >
-            <Image
-              source={require("../assets/list-mascot.png")}
-              style={styles.icon}
-            />
-            <View style={styles.buttonBackground}>
-              <Text style={styles.buttonText}>Grocery List</Text>
-            </View>
-          </TouchableOpacity>
+          {/* Main Text */}
+          <Text style={styles.title}>Pantry Quest</Text>
         </View>
 
-        {/* Second Row */}
-        <View style={styles.row}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate("Recipes")}
-          >
-            <Image
-              source={require("../assets/recipe-mascot.png")}
-              style={styles.icon}
-            />
-            <View style={styles.buttonBackground}>
-              <Text style={styles.buttonText}>Recipes</Text>
-            </View>
-          </TouchableOpacity>
+        <View style={styles.mainContentContainer}>
+          {/* First Row */}
+          <View style={styles.row}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate("Pantry")}
+            >
+              <Image
+                source={require("../assets/pantry-mascot.png")}
+                style={styles.icon}
+              />
+              <View style={styles.buttonBackground}>
+                <Text style={styles.buttonText}>Pantry</Text>
+              </View>
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate("Settings")}
-          >
-            <Image
-              source={require("../assets/gear-mascot.png")}
-              style={styles.icon}
-            />
-            <View style={styles.buttonBackground}>
-              <Text style={styles.buttonText}>Settings</Text>
-            </View>
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate("Grocery")}
+            >
+              <Image
+                source={require("../assets/list-mascot.png")}
+                style={styles.icon}
+              />
+              <View style={styles.buttonBackground}>
+                <Text style={styles.buttonText}>Grocery List</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+
+          {/* Second Row */}
+          <View style={styles.row}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate("Recipes")}
+            >
+              <Image
+                source={require("../assets/recipe-mascot.png")}
+                style={styles.icon}
+              />
+              <View style={styles.buttonBackground}>
+                <Text style={styles.buttonText}>Recipes</Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate("Settings")}
+            >
+              <Image
+                source={require("../assets/gear-mascot.png")}
+                style={styles.icon}
+              />
+              <View style={styles.buttonBackground}>
+                <Text style={styles.buttonText}>Settings</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
+        <View style={styles.mainIconContainer}>
+          <Image
+            source={require("../assets/pantry-quest-logo.png")}
+            style={styles.mainIcon}
+          />
+        </View>
+        <Footer></Footer>
       </View>
-      <View style={styles.mainIconContainer}>
-        <Image
-          source={require("../assets/pantry-quest-logo.png")}
-          style={styles.mainIcon}
-        />
-      </View>
-      <Footer></Footer>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
