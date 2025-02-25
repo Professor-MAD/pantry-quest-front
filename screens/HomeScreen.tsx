@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  TouchableWithoutFeedback,
+} from "react-native";
 import Footer from "@/components/Footer";
 import AccountInfo from "@/components/AccountInfo";
 
@@ -9,12 +16,16 @@ export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => setShowAccountInfoModal(true)}>
-        {showAccountInfoModal && <AccountInfo />}
         <Image
           style={styles.chefImage}
           source={require("../assets/user-info-finished-copy.png")}
         />
       </TouchableOpacity>
+      {showAccountInfoModal && (
+        <View style={styles.accountInfoContainer}>
+          <AccountInfo />
+        </View>
+      )}
 
       <View style={styles.titleContainer}>
         <Text
@@ -212,5 +223,13 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 10,
     left: 130,
+  },
+  accountInfoContainer: {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

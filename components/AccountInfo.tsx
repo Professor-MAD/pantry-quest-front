@@ -11,10 +11,11 @@ export default function AccountInfo() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
-    backgroundColor: "#e1ecc6",
+    position: "absolute",
+    backgroundColor: "#f9d4ba",
+    zIndex: 300,
+    height: "90%",
+    width: "90%",
   },
   titleText: {
     color: "black",
