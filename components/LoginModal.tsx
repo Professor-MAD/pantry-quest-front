@@ -34,7 +34,7 @@ export default function LoginModal() {
       </View>
       <TouchableOpacity style={styles.loginButton}>
         <View>
-          <Text>LOGIN</Text>
+          <Text style={styles.loginButtonText}>LOGIN</Text>
         </View>
       </TouchableOpacity>
       <View>
@@ -121,6 +121,10 @@ const styles = StyleSheet.create({
     // 🔹 Android SHADOW
     elevation: 8,
     margin: 5,
+  },
+  loginButtonText: {
+    fontFamily: "Bellfoods",
+    color: "grey",
   },
   orSignUpUsing: {
     display: "flex",
