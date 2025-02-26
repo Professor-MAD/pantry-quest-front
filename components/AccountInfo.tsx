@@ -1,8 +1,15 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import LoginModal from "./LoginModal";
 
 export default function AccountInfo() {
-  return <View style={styles.container}></View>;
+  return (
+    <View style={styles.container}>
+      <View>
+        <LoginModal />
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
