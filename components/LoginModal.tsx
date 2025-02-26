@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient"; // ✅ Import Linear Gradient
@@ -55,18 +56,20 @@ export default function LoginModal() {
       {/* Or Sign Up Using */}
       <Text style={styles.orSignUpUsing}>Or Sign Up Using</Text>
       <TouchableOpacity>
-        <FontAwesome
-          name="google"
-          size={40}
-          color="red"
-          style={styles.googleIcon}
-        />
+        <View style={styles.googleIconWrapper}>
+          <FontAwesome
+            name="google"
+            size={40}
+            color="red"
+            style={styles.googleIcon}
+          />
+        </View>
       </TouchableOpacity>
 
       {/* Sign Up Option - Restored Original Styling */}
       <View style={styles.signUpBottom}>
-        <Text style={styles.orSignUpUsingText}>Or Sign Up Using</Text>
-        <TouchableOpacity style={styles.signUpButton}>
+        <Text style={styles.orSignUpUsingText}>No Account?</Text>
+        <TouchableOpacity>
           <LinearGradient
             colors={["#ffb6c1", "#ff69b4"]} // 🔹 Pink → Dark Pink Gradient
             style={styles.gradientSignUpButton}
@@ -74,6 +77,12 @@ export default function LoginModal() {
             <Text style={styles.orSignUpUsingBottom}>SIGN UP</Text>
           </LinearGradient>
         </TouchableOpacity>
+      </View>
+      <View style={styles.pantryQuestImageContainer}>
+        <Image
+          style={styles.appLogo}
+          source={require("../assets/pantry-quest-logo.png")}
+        />
       </View>
     </View>
   );
@@ -160,6 +169,10 @@ const styles = StyleSheet.create({
   },
   googleIcon: {
     marginVertical: 10,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   signUpBottom: {
     marginTop: 25,
@@ -177,6 +190,8 @@ const styles = StyleSheet.create({
     height: 40,
     width: 100,
     marginTop: 15,
+    display: "flex",
+    flexDirection: "column",
     // 🔹 iOS SHADOW
     shadowColor: "#000",
     shadowOffset: { width: 4, height: 4 },
@@ -192,5 +207,34 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 18,
     fontWeight: "bold",
+  },
+  googleIconWrapper: {
+    backgroundColor: "white",
+    borderRadius: 30,
+    width: 60,
+    // 🔹 iOS SHADOW
+    shadowColor: "#000",
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+
+    // 🔹 Android SHADOW
+    elevation: 8,
+    margin: 5,
+  },
+  pantryQuestImageContainer: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 200,
+    height: 60,
+  },
+  appLogo: {
+    width: 60,
+    height: 60,
+    marginTop: 10,
+    padding: 15,
+    resizeMode: "contain",
   },
 });
