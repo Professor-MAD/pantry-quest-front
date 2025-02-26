@@ -8,7 +8,7 @@ export default function AccountInfo() {
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    backgroundColor: "#ed846a", // 🔹 90% opacity
+    backgroundColor: "#ed846a",
     zIndex: 300,
     height: "100%",
     width: "100%",

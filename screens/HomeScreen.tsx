@@ -17,8 +17,9 @@ export default function HomeScreen({ navigation }) {
   return (
     <TouchableWithoutFeedback
       onPress={() => {
-        setShowAccountInfoModal(false);
-        Keyboard.dismiss();
+        if (showAccountInfoModal) {
+          setShowAccountInfoModal(false);
+        }
       }}
     >
       <View style={styles.container}>
