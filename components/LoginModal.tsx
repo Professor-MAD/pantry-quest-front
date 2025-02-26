@@ -5,16 +5,21 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  Image,
 } from "react-native";
+import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient"; // ✅ Import Linear Gradient
 
 export default function LoginModal() {
   const [usernameInput, setUsernameInput] = useState("");
+  const [passwordInput, setPasswordInput] = useState("");
+
   return (
     <View style={styles.container}>
       <Text style={styles.loginText}>Login</Text>
-      <View>
-        <Text style={styles.userNameTextAbove}>Username</Text>
+
+      {/* Username Input */}
+      <View style={styles.inputContainer}>
+        <FontAwesome name="user" size={24} color="grey" style={styles.icon} />
         <TextInput
           style={styles.input}
           placeholder="Type your username"
@@ -22,34 +27,53 @@ export default function LoginModal() {
           onChangeText={setUsernameInput}
         />
       </View>
-      <View>
-        <Text style={styles.userNameTextAbove}>Password</Text>
+
+      {/* Password Input */}
+      <View style={styles.inputContainer}>
+        <MaterialIcons name="lock" size={24} color="grey" style={styles.icon} />
         <TextInput
           style={styles.input}
           placeholder="Type your password"
-          value={usernameInput}
-          onChangeText={setUsernameInput}
+          secureTextEntry
+          value={passwordInput}
+          onChangeText={setPasswordInput}
         />
-        <Text style={styles.forgotPassword}>Forgot password?</Text>
       </View>
+
+      <Text style={styles.forgotPassword}>Forgot password?</Text>
+
+      {/* Login Button with Gradient */}
       <TouchableOpacity style={styles.loginButton}>
-        <View>
+        <LinearGradient
+          colors={["#ffcc70", "#ff8c42", "#f76c6c"]}
+          style={styles.gradientButton}
+        >
           <Text style={styles.loginButtonText}>LOGIN</Text>
-        </View>
+        </LinearGradient>
       </TouchableOpacity>
-      <View>
-        <Text style={styles.orSignUpUsing}>Or Sign Up Using</Text>
-        <View>
-          <Image />
-        </View>
-      </View>
+
+      {/* Or Sign Up Using */}
+      <Text style={styles.orSignUpUsing}>Or Sign Up Using</Text>
+      <TouchableOpacity>
+        <FontAwesome
+          name="google"
+          size={40}
+          color="red"
+          style={styles.googleIcon}
+        />
+      </TouchableOpacity>
+
+      {/* Sign Up Option - Restored Original Styling */}
       <View style={styles.signUpBottom}>
-        <Text style={styles.signUpBottom}>Or Sign Up Using</Text>
-        <View>
-          <TouchableOpacity>
+        <Text style={styles.orSignUpUsingText}>Or Sign Up Using</Text>
+        <TouchableOpacity style={styles.signUpButton}>
+          <LinearGradient
+            colors={["#ffb6c1", "#ff69b4"]} // 🔹 Pink → Dark Pink Gradient
+            style={styles.gradientSignUpButton}
+          >
             <Text style={styles.orSignUpUsingBottom}>SIGN UP</Text>
-          </TouchableOpacity>
-        </View>
+          </LinearGradient>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -58,7 +82,6 @@ export default function LoginModal() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "transparent",
-    display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
@@ -69,16 +92,16 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 40,
   },
-  input: {
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "white",
     borderWidth: 1,
     borderColor: "#ccc",
-    padding: 10,
-    marginBottom: 10,
     borderRadius: 5,
-    fontFamily: "Bellfoods",
-    backgroundColor: "white",
-    color: "grey",
+    paddingHorizontal: 10,
     width: 300,
+    marginBottom: 10,
     // 🔹 iOS SHADOW
     shadowColor: "#000",
     shadowOffset: { width: 4, height: 4 },
@@ -89,28 +112,30 @@ const styles = StyleSheet.create({
     elevation: 8,
     margin: 5,
   },
-  userNameTextAbove: {
-    color: "grey",
+  icon: {
+    marginRight: 10,
+  },
+  input: {
+    flex: 1,
+    height: 40,
     fontFamily: "Bellfoods",
-    margin: 5,
+    color: "grey",
   },
   forgotPassword: {
     color: "grey",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    alignItems: "flex-end",
     fontFamily: "Bellfoods",
+    marginBottom: 20,
   },
   loginButton: {
-    backgroundColor: "yellow",
+    borderRadius: 40,
+    overflow: "hidden", // Ensures gradient does not leak outside borders
+    marginTop: 25,
+  },
+  gradientButton: {
     width: 220,
-    display: "flex",
-    flexDirection: "column",
+    height: 40,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 25,
-    height: 35,
     borderRadius: 40,
     // 🔹 iOS SHADOW
     shadowColor: "#000",
@@ -124,38 +149,34 @@ const styles = StyleSheet.create({
   },
   loginButtonText: {
     fontFamily: "Bellfoods",
-    color: "grey",
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
   },
   orSignUpUsing: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    height: 70,
     color: "grey",
     fontFamily: "Bellfoods",
+    marginTop: 15,
+  },
+  googleIcon: {
+    marginVertical: 10,
   },
   signUpBottom: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-end",
+    marginTop: 25,
     alignItems: "center",
+  },
+  orSignUpUsingText: {
     color: "grey",
     fontFamily: "Bellfoods",
-    height: 70,
   },
-  orSignUpUsingBottom: {
-    display: "flex",
-    flexDirection: "column",
+  gradientSignUpButton: {
+    backgroundColor: "pink",
+    borderRadius: 40,
     justifyContent: "center",
     alignItems: "center",
-    height: 30,
-    width: 70,
-    borderRadius: 40,
-    color: "grey",
-    fontFamily: "Bellfoods",
-    backgroundColor: "pink",
-    marginTop: 20,
+    height: 40,
+    width: 100,
+    marginTop: 15,
     // 🔹 iOS SHADOW
     shadowColor: "#000",
     shadowOffset: { width: 4, height: 4 },
@@ -165,5 +186,11 @@ const styles = StyleSheet.create({
     // 🔹 Android SHADOW
     elevation: 8,
     margin: 5,
+  },
+  orSignUpUsingBottom: {
+    fontFamily: "Bellfoods",
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
   },
 });
