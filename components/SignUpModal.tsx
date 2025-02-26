@@ -14,18 +14,18 @@ import {
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient"; // ✅ Import Linear Gradient
 
-export default function LoginModal({ setOnSignUpPage }) {
+export default function SignUpModal({ setOnSignUpPage }) {
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === "ios" ? "padding" : "height"} // Adjust for iOS and Android
       style={styles.keyboardView}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
-          <Text style={styles.loginText}>Login</Text>
+          <Text style={styles.loginText}>Sign Up</Text>
 
           {/* Username Input */}
           <View style={styles.inputContainer}>
@@ -65,20 +65,37 @@ export default function LoginModal({ setOnSignUpPage }) {
             />
           </View>
 
-          <Text style={styles.forgotPassword}>Forgot password?</Text>
+          {/* Retype Password Input */}
+          <View style={styles.inputContainer}>
+            <MaterialIcons
+              name="lock"
+              size={24}
+              color="grey"
+              style={styles.icon}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Retype to confirm your password"
+              secureTextEntry
+              value={passwordInput}
+              onChangeText={setPasswordInput}
+              keyboardType="default"
+              returnKeyType="done"
+            />
+          </View>
 
-          {/* Login Button */}
+          {/* Login Button with Gradient */}
           <TouchableOpacity style={styles.loginButton}>
             <LinearGradient
               colors={["#ffcc70", "#ff8c42", "#f76c6c"]}
               style={styles.gradientButton}
             >
-              <Text style={styles.loginButtonText}>LOGIN</Text>
+              <Text style={styles.loginButtonText}>SIGN UP</Text>
             </LinearGradient>
           </TouchableOpacity>
 
           {/* Or Sign Up Using */}
-          <Text style={styles.orSignUpUsing}>Or Login Using</Text>
+          <Text style={styles.orSignUpUsing}>Or Sign Up Using</Text>
           <TouchableOpacity>
             <View style={styles.googleIconWrapper}>
               <FontAwesome
@@ -90,15 +107,17 @@ export default function LoginModal({ setOnSignUpPage }) {
             </View>
           </TouchableOpacity>
 
-          {/* Sign Up Option */}
+          {/* Sign Up Option - Restored Original Styling */}
           <View style={styles.signUpBottom}>
-            <Text style={styles.orSignUpUsingText}>No Account?</Text>
-            <TouchableOpacity onPress={() => setOnSignUpPage(true)}>
+            <Text style={styles.orSignUpUsingText}>
+              Already have an account?
+            </Text>
+            <TouchableOpacity onPress={() => setOnSignUpPage(false)}>
               <LinearGradient
                 colors={["#ffb6c1", "#ff69b4"]}
                 style={styles.gradientSignUpButton}
               >
-                <Text style={styles.orSignUpUsingBottom}>SIGN UP</Text>
+                <Text style={styles.orSignUpUsingBottom}>LOGIN</Text>
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -123,6 +142,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    // backgroundColor: "#f9d4ba",
   },
   loginText: {
     padding: 25,
