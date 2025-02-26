@@ -38,9 +38,17 @@ export default function LoginModal() {
         </View>
       </TouchableOpacity>
       <View>
-        <Text styles={styles.orSignUpUsing}>Or Sign Up Using</Text>
+        <Text style={styles.orSignUpUsing}>Or Sign Up Using</Text>
         <View>
           <Image />
+        </View>
+      </View>
+      <View style={styles.signUpBottom}>
+        <Text style={styles.signUpBottom}>Or Sign Up Using</Text>
+        <View>
+          <TouchableOpacity>
+            <Text style={styles.orSignUpUsingBottom}>SIGN UP</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -71,6 +79,15 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     color: "grey",
     width: 300,
+    // 🔹 iOS SHADOW
+    shadowColor: "#000",
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+
+    // 🔹 Android SHADOW
+    elevation: 8,
+    margin: 5,
   },
   userNameTextAbove: {
     color: "grey",
@@ -95,11 +112,54 @@ const styles = StyleSheet.create({
     marginTop: 25,
     height: 35,
     borderRadius: 40,
+    // 🔹 iOS SHADOW
+    shadowColor: "#000",
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+
+    // 🔹 Android SHADOW
+    elevation: 8,
+    margin: 5,
   },
   orSignUpUsing: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    height: 70,
+    color: "grey",
+    fontFamily: "Bellfoods",
+  },
+  signUpBottom: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    color: "grey",
+    fontFamily: "Bellfoods",
+    height: 70,
+  },
+  orSignUpUsingBottom: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 30,
+    width: 70,
+    borderRadius: 40,
+    color: "grey",
+    fontFamily: "Bellfoods",
+    backgroundColor: "pink",
+    marginTop: 20,
+    // 🔹 iOS SHADOW
+    shadowColor: "#000",
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+
+    // 🔹 Android SHADOW
+    elevation: 8,
+    margin: 5,
   },
 });
