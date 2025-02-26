@@ -6,6 +6,10 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient"; // ✅ Import Linear Gradient
@@ -15,80 +19,105 @@ export default function LoginModal() {
   const [passwordInput, setPasswordInput] = useState("");
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.loginText}>Login</Text>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"} // Adjust for iOS and Android
+      style={styles.keyboardView}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <Text style={styles.loginText}>Login</Text>
 
-      {/* Username Input */}
-      <View style={styles.inputContainer}>
-        <FontAwesome name="user" size={24} color="grey" style={styles.icon} />
-        <TextInput
-          style={styles.input}
-          placeholder="Type your username"
-          value={usernameInput}
-          onChangeText={setUsernameInput}
-        />
-      </View>
+          {/* Username Input */}
+          <View style={styles.inputContainer}>
+            <FontAwesome
+              name="user"
+              size={24}
+              color="grey"
+              style={styles.icon}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Type your username"
+              value={usernameInput}
+              onChangeText={setUsernameInput}
+              keyboardType="default"
+              autoCapitalize="none"
+              returnKeyType="next"
+            />
+          </View>
 
-      {/* Password Input */}
-      <View style={styles.inputContainer}>
-        <MaterialIcons name="lock" size={24} color="grey" style={styles.icon} />
-        <TextInput
-          style={styles.input}
-          placeholder="Type your password"
-          secureTextEntry
-          value={passwordInput}
-          onChangeText={setPasswordInput}
-        />
-      </View>
+          {/* Password Input */}
+          <View style={styles.inputContainer}>
+            <MaterialIcons
+              name="lock"
+              size={24}
+              color="grey"
+              style={styles.icon}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Type your password"
+              secureTextEntry
+              value={passwordInput}
+              onChangeText={setPasswordInput}
+              keyboardType="default"
+              returnKeyType="done"
+            />
+          </View>
 
-      <Text style={styles.forgotPassword}>Forgot password?</Text>
+          <Text style={styles.forgotPassword}>Forgot password?</Text>
 
-      {/* Login Button with Gradient */}
-      <TouchableOpacity style={styles.loginButton}>
-        <LinearGradient
-          colors={["#ffcc70", "#ff8c42", "#f76c6c"]}
-          style={styles.gradientButton}
-        >
-          <Text style={styles.loginButtonText}>LOGIN</Text>
-        </LinearGradient>
-      </TouchableOpacity>
+          {/* Login Button with Gradient */}
+          <TouchableOpacity style={styles.loginButton}>
+            <LinearGradient
+              colors={["#ffcc70", "#ff8c42", "#f76c6c"]}
+              style={styles.gradientButton}
+            >
+              <Text style={styles.loginButtonText}>LOGIN</Text>
+            </LinearGradient>
+          </TouchableOpacity>
 
-      {/* Or Sign Up Using */}
-      <Text style={styles.orSignUpUsing}>Or Sign Up Using</Text>
-      <TouchableOpacity>
-        <View style={styles.googleIconWrapper}>
-          <FontAwesome
-            name="google"
-            size={40}
-            color="red"
-            style={styles.googleIcon}
-          />
+          {/* Or Sign Up Using */}
+          <Text style={styles.orSignUpUsing}>Or Sign Up Using</Text>
+          <TouchableOpacity>
+            <View style={styles.googleIconWrapper}>
+              <FontAwesome
+                name="google"
+                size={40}
+                color="red"
+                style={styles.googleIcon}
+              />
+            </View>
+          </TouchableOpacity>
+
+          {/* Sign Up Option - Restored Original Styling */}
+          <View style={styles.signUpBottom}>
+            <Text style={styles.orSignUpUsingText}>No Account?</Text>
+            <TouchableOpacity>
+              <LinearGradient
+                colors={["#ffb6c1", "#ff69b4"]} // 🔹 Pink → Dark Pink Gradient
+                style={styles.gradientSignUpButton}
+              >
+                <Text style={styles.orSignUpUsingBottom}>SIGN UP</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.pantryQuestImageContainer}>
+            <Image
+              style={styles.appLogo}
+              source={require("../assets/pantry-quest-logo.png")}
+            />
+          </View>
         </View>
-      </TouchableOpacity>
-
-      {/* Sign Up Option - Restored Original Styling */}
-      <View style={styles.signUpBottom}>
-        <Text style={styles.orSignUpUsingText}>No Account?</Text>
-        <TouchableOpacity>
-          <LinearGradient
-            colors={["#ffb6c1", "#ff69b4"]} // 🔹 Pink → Dark Pink Gradient
-            style={styles.gradientSignUpButton}
-          >
-            <Text style={styles.orSignUpUsingBottom}>SIGN UP</Text>
-          </LinearGradient>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.pantryQuestImageContainer}>
-        <Image
-          style={styles.appLogo}
-          source={require("../assets/pantry-quest-logo.png")}
-        />
-      </View>
-    </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
+  keyboardView: {
+    flex: 1,
+  },
   container: {
     backgroundColor: "transparent",
     flexDirection: "column",
