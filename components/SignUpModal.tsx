@@ -12,22 +12,44 @@ import {
   Keyboard,
 } from "react-native";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient"; // ✅ Import Linear Gradient
+import { LinearGradient } from "expo-linear-gradient";
+import { signUp } from "../authService"; // ✅ Import sign-up function
 
 export default function SignUpModal({ setOnSignUpPage }) {
-  const [usernameInput, setUsernameInput] = useState("");
+  const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
+  const [confirmPasswordInput, setConfirmPasswordInput] = useState("");
+
+  const handleSignUp = async () => {
+    if (!emailInput || !passwordInput || !confirmPasswordInput) {
+      console.error("Please fill in all fields.");
+      return;
+    }
+
+    if (passwordInput !== confirmPasswordInput) {
+      console.error("Passwords do not match.");
+      return;
+    }
+
+    try {
+      const user = await signUp(emailInput, passwordInput);
+      console.log("User signed up & stored in Firestore:", user);
+      setOnSignUpPage(false); // Redirect to login after sign-up
+    } catch (error) {
+      console.error("Sign Up Error:", error.message);
+    }
+  };
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"} // Adjust for iOS and Android
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.keyboardView}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <Text style={styles.loginText}>Sign Up</Text>
 
-          {/* Username Input */}
+          {/* Email Input */}
           <View style={styles.inputContainer}>
             <FontAwesome
               name="user"
@@ -37,10 +59,10 @@ export default function SignUpModal({ setOnSignUpPage }) {
             />
             <TextInput
               style={styles.input}
-              placeholder="Type your username"
-              value={usernameInput}
-              onChangeText={setUsernameInput}
-              keyboardType="default"
+              placeholder="Type your email"
+              value={emailInput}
+              onChangeText={setEmailInput}
+              keyboardType="email-address"
               autoCapitalize="none"
               returnKeyType="next"
             />
@@ -61,11 +83,11 @@ export default function SignUpModal({ setOnSignUpPage }) {
               value={passwordInput}
               onChangeText={setPasswordInput}
               keyboardType="default"
-              returnKeyType="done"
+              returnKeyType="next"
             />
           </View>
 
-          {/* Retype Password Input */}
+          {/* Confirm Password Input */}
           <View style={styles.inputContainer}>
             <MaterialIcons
               name="lock"
@@ -75,17 +97,17 @@ export default function SignUpModal({ setOnSignUpPage }) {
             />
             <TextInput
               style={styles.input}
-              placeholder="Retype to confirm your password"
+              placeholder="Confirm your password"
               secureTextEntry
-              value={passwordInput}
-              onChangeText={setPasswordInput}
+              value={confirmPasswordInput}
+              onChangeText={setConfirmPasswordInput}
               keyboardType="default"
               returnKeyType="done"
             />
           </View>
 
-          {/* Login Button with Gradient */}
-          <TouchableOpacity style={styles.loginButton}>
+          {/* Sign-Up Button */}
+          <TouchableOpacity onPress={handleSignUp} style={styles.loginButton}>
             <LinearGradient
               colors={["#ffcc70", "#ff8c42", "#f76c6c"]}
               style={styles.gradientButton}
@@ -94,20 +116,7 @@ export default function SignUpModal({ setOnSignUpPage }) {
             </LinearGradient>
           </TouchableOpacity>
 
-          {/* Or Sign Up Using */}
-          <Text style={styles.orSignUpUsing}>Or Sign Up Using</Text>
-          <TouchableOpacity>
-            <View style={styles.googleIconWrapper}>
-              <FontAwesome
-                name="google"
-                size={40}
-                color="red"
-                style={styles.googleIcon}
-              />
-            </View>
-          </TouchableOpacity>
-
-          {/* Sign Up Option - Restored Original Styling */}
+          {/* Already have an account? */}
           <View style={styles.signUpBottom}>
             <Text style={styles.orSignUpUsingText}>
               Already have an account?
@@ -121,6 +130,8 @@ export default function SignUpModal({ setOnSignUpPage }) {
               </LinearGradient>
             </TouchableOpacity>
           </View>
+
+          {/* App Logo */}
           <View style={styles.pantryQuestImageContainer}>
             <Image
               style={styles.appLogo}
@@ -142,7 +153,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    // backgroundColor: "#f9d4ba",
   },
   loginText: {
     padding: 25,
@@ -160,15 +170,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     width: 300,
     marginBottom: 10,
-    // 🔹 iOS SHADOW
-    shadowColor: "#000",
-    shadowOffset: { width: 4, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-
-    // 🔹 Android SHADOW
-    elevation: 8,
-    margin: 5,
   },
   icon: {
     marginRight: 10,
@@ -178,112 +179,5 @@ const styles = StyleSheet.create({
     height: 40,
     fontFamily: "Bellfoods",
     color: "grey",
-  },
-  forgotPassword: {
-    color: "grey",
-    fontFamily: "Bellfoods",
-    marginBottom: 20,
-  },
-  loginButton: {
-    borderRadius: 40,
-    overflow: "hidden", // Ensures gradient does not leak outside borders
-    marginTop: 25,
-  },
-  gradientButton: {
-    width: 220,
-    height: 40,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 40,
-    // 🔹 iOS SHADOW
-    shadowColor: "#000",
-    shadowOffset: { width: 4, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-
-    // 🔹 Android SHADOW
-    elevation: 8,
-    margin: 5,
-  },
-  loginButtonText: {
-    fontFamily: "Bellfoods",
-    color: "white",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  orSignUpUsing: {
-    color: "grey",
-    fontFamily: "Bellfoods",
-    marginTop: 15,
-  },
-  googleIcon: {
-    marginVertical: 10,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  signUpBottom: {
-    marginTop: 25,
-    alignItems: "center",
-  },
-  orSignUpUsingText: {
-    color: "grey",
-    fontFamily: "Bellfoods",
-  },
-  gradientSignUpButton: {
-    backgroundColor: "pink",
-    borderRadius: 40,
-    justifyContent: "center",
-    alignItems: "center",
-    height: 40,
-    width: 100,
-    marginTop: 15,
-    display: "flex",
-    flexDirection: "column",
-    // 🔹 iOS SHADOW
-    shadowColor: "#000",
-    shadowOffset: { width: 4, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-
-    // 🔹 Android SHADOW
-    elevation: 8,
-    margin: 5,
-  },
-  orSignUpUsingBottom: {
-    fontFamily: "Bellfoods",
-    color: "white",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  googleIconWrapper: {
-    backgroundColor: "white",
-    borderRadius: 30,
-    width: 60,
-    // 🔹 iOS SHADOW
-    shadowColor: "#000",
-    shadowOffset: { width: 4, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-
-    // 🔹 Android SHADOW
-    elevation: 8,
-    margin: 5,
-  },
-  pantryQuestImageContainer: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    width: 200,
-    height: 60,
-  },
-  appLogo: {
-    width: 60,
-    height: 60,
-    marginTop: 10,
-    padding: 15,
-    resizeMode: "contain",
   },
 });

@@ -1,24 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { getUserData, logOut } from "../authService";
+import { auth } from "../firebaseConfig";
 
-export default function ProfileScreen({ user, onSignOut }) {
+export default function ProfileScreen({ onSignOut }) {
+  const [userData, setUserData] = useState(null);
+  const user = auth.currentUser;
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (!user) return;
+      try {
+        const data = await getUserData(user.uid);
+        setUserData(data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, [user]);
+
+  if (!user) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.header}>No User Logged In</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Profile</Text>
 
       <View style={styles.infoContainer}>
-        <Text style={styles.label}>Username:</Text>
-        <Text style={styles.value}>{user.displayName || "N/A"}</Text>
-
         <Text style={styles.label}>Email:</Text>
         <Text style={styles.value}>{user.email}</Text>
 
-        <Text style={styles.label}>Account ID:</Text>
-        <Text style={styles.value}>{user.uid}</Text>
+        <Text style={styles.label}>Account Created:</Text>
+        <Text style={styles.value}>{userData?.createdAt || "Loading..."}</Text>
 
         <Text style={styles.label}>Household ID:</Text>
-        <Text style={styles.value}>{"None (Join or Create one!)"}</Text>
+        <Text style={styles.value}>
+          {userData?.householdID || "None (Join or Create one!)"}
+        </Text>
       </View>
 
       {/* Buttons to create or join a household */}
@@ -35,7 +61,13 @@ export default function ProfileScreen({ user, onSignOut }) {
       </TouchableOpacity>
 
       {/* Sign Out Button */}
-      <TouchableOpacity onPress={onSignOut} style={styles.signOutButton}>
+      <TouchableOpacity
+        onPress={async () => {
+          await logOut();
+          onSignOut();
+        }}
+        style={styles.signOutButton}
+      >
         <Text style={styles.signOutText}>Sign Out</Text>
       </TouchableOpacity>
     </View>
@@ -61,48 +93,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     width: "90%",
-    shadowColor: "#000",
-    shadowOffset: { width: 2, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 5,
   },
-  label: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "black",
-  },
-  value: {
-    fontSize: 16,
-    color: "grey",
-    marginBottom: 10,
-  },
-  button: {
-    borderRadius: 40,
-    overflow: "hidden",
-    width: 220,
-    marginTop: 15,
-  },
-  gradient: {
-    padding: 10,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 40,
-  },
-  buttonText: {
-    fontFamily: "Bellfoods",
-    fontSize: 16,
-    color: "white",
-  },
-  signOutButton: {
-    marginTop: 20,
-    backgroundColor: "#f76c6c",
-    padding: 10,
-    borderRadius: 20,
-  },
-  signOutText: {
-    fontFamily: "Bellfoods",
-    fontSize: 16,
-    color: "white",
-  },
+  label: { fontSize: 16, fontWeight: "bold", color: "black" },
+  value: { fontSize: 16, color: "grey", marginBottom: 10 },
 });

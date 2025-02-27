@@ -12,11 +12,25 @@ import {
   Keyboard,
 } from "react-native";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient"; // ✅ Import Linear Gradient
+import { LinearGradient } from "expo-linear-gradient";
+import { auth } from "../firebaseConfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
-export default function LoginModal({ setOnSignUpPage }) {
+export default function LoginModal({ setOnSignUpPage, onLoginSuccess }) {
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, usernameInput, passwordInput);
+      console.log("User logged in:", auth.currentUser);
+      onLoginSuccess(); // Notify parent component
+    } catch (error) {
+      console.error("Login error:", error.message);
+      setErrorMessage("Invalid email or password. Please try again.");
+    }
+  };
 
   return (
     <KeyboardAvoidingView
@@ -26,6 +40,10 @@ export default function LoginModal({ setOnSignUpPage }) {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <Text style={styles.loginText}>Login</Text>
+
+          {errorMessage ? (
+            <Text style={styles.errorText}>{errorMessage}</Text>
+          ) : null}
 
           {/* Username Input */}
           <View style={styles.inputContainer}>
@@ -37,10 +55,10 @@ export default function LoginModal({ setOnSignUpPage }) {
             />
             <TextInput
               style={styles.input}
-              placeholder="Type your username"
+              placeholder="Email"
               value={usernameInput}
               onChangeText={setUsernameInput}
-              keyboardType="default"
+              keyboardType="email-address"
               autoCapitalize="none"
               returnKeyType="next"
             />
@@ -56,7 +74,7 @@ export default function LoginModal({ setOnSignUpPage }) {
             />
             <TextInput
               style={styles.input}
-              placeholder="Type your password"
+              placeholder="Password"
               secureTextEntry
               value={passwordInput}
               onChangeText={setPasswordInput}
@@ -68,7 +86,7 @@ export default function LoginModal({ setOnSignUpPage }) {
           <Text style={styles.forgotPassword}>Forgot password?</Text>
 
           {/* Login Button */}
-          <TouchableOpacity style={styles.loginButton}>
+          <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
             <LinearGradient
               colors={["#ffcc70", "#ff8c42", "#f76c6c"]}
               style={styles.gradientButton}
@@ -115,12 +133,9 @@ export default function LoginModal({ setOnSignUpPage }) {
 }
 
 const styles = StyleSheet.create({
-  keyboardView: {
-    flex: 1,
-  },
+  keyboardView: { flex: 1 },
   container: {
     backgroundColor: "transparent",
-    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -130,6 +145,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 40,
   },
+  errorText: { color: "red", marginBottom: 10, fontSize: 16 },
   inputContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -140,50 +156,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     width: 300,
     marginBottom: 10,
-    // 🔹 iOS SHADOW
-    shadowColor: "#000",
-    shadowOffset: { width: 4, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-
-    // 🔹 Android SHADOW
-    elevation: 8,
-    margin: 5,
   },
-  icon: {
-    marginRight: 10,
-  },
-  input: {
-    flex: 1,
-    height: 40,
-    fontFamily: "Bellfoods",
-    color: "grey",
-  },
-  forgotPassword: {
-    color: "grey",
-    fontFamily: "Bellfoods",
-    marginBottom: 20,
-  },
-  loginButton: {
-    borderRadius: 40,
-    overflow: "hidden", // Ensures gradient does not leak outside borders
-    marginTop: 25,
-  },
+  icon: { marginRight: 10 },
+  input: { flex: 1, height: 40, fontFamily: "Bellfoods", color: "grey" },
+  forgotPassword: { color: "grey", fontFamily: "Bellfoods", marginBottom: 20 },
+  loginButton: { borderRadius: 40, overflow: "hidden", marginTop: 25 },
   gradientButton: {
     width: 220,
     height: 40,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 40,
-    // 🔹 iOS SHADOW
-    shadowColor: "#000",
-    shadowOffset: { width: 4, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-
-    // 🔹 Android SHADOW
-    elevation: 8,
-    margin: 5,
   },
   loginButtonText: {
     fontFamily: "Bellfoods",
@@ -191,26 +174,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
-  orSignUpUsing: {
-    color: "grey",
-    fontFamily: "Bellfoods",
-    marginTop: 15,
-  },
-  googleIcon: {
-    marginVertical: 10,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  signUpBottom: {
-    marginTop: 25,
-    alignItems: "center",
-  },
-  orSignUpUsingText: {
-    color: "grey",
-    fontFamily: "Bellfoods",
-  },
+  signUpBottom: { marginTop: 25, alignItems: "center" },
+  orSignUpUsingText: { color: "grey", fontFamily: "Bellfoods" },
   gradientSignUpButton: {
     backgroundColor: "pink",
     borderRadius: 40,
@@ -219,51 +184,11 @@ const styles = StyleSheet.create({
     height: 40,
     width: 100,
     marginTop: 15,
-    display: "flex",
-    flexDirection: "column",
-    // 🔹 iOS SHADOW
-    shadowColor: "#000",
-    shadowOffset: { width: 4, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-
-    // 🔹 Android SHADOW
-    elevation: 8,
-    margin: 5,
   },
   orSignUpUsingBottom: {
     fontFamily: "Bellfoods",
     color: "white",
     fontSize: 18,
     fontWeight: "bold",
-  },
-  googleIconWrapper: {
-    backgroundColor: "white",
-    borderRadius: 30,
-    width: 60,
-    // 🔹 iOS SHADOW
-    shadowColor: "#000",
-    shadowOffset: { width: 4, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-
-    // 🔹 Android SHADOW
-    elevation: 8,
-    margin: 5,
-  },
-  pantryQuestImageContainer: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    width: 200,
-    height: 60,
-  },
-  appLogo: {
-    width: 60,
-    height: 60,
-    marginTop: 10,
-    padding: 15,
-    resizeMode: "contain",
   },
 });
