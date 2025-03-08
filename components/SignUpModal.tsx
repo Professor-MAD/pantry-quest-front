@@ -170,6 +170,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     width: 300,
     marginBottom: 10,
+    // 🔹 iOS SHADOW
+    shadowColor: "#000",
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+
+    // 🔹 Android SHADOW
+    elevation: 8,
+    margin: 5,
   },
   icon: {
     marginRight: 10,
@@ -179,5 +188,112 @@ const styles = StyleSheet.create({
     height: 40,
     fontFamily: "Bellfoods",
     color: "grey",
+  },
+  forgotPassword: {
+    color: "grey",
+    fontFamily: "Bellfoods",
+    marginBottom: 20,
+  },
+  loginButton: {
+    borderRadius: 40,
+    overflow: "hidden", // Ensures gradient does not leak outside borders
+    marginTop: 25,
+  },
+  gradientButton: {
+    width: 220,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 40,
+    // 🔹 iOS SHADOW
+    shadowColor: "#000",
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+
+    // 🔹 Android SHADOW
+    elevation: 8,
+    margin: 5,
+  },
+  loginButtonText: {
+    fontFamily: "Bellfoods",
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  orSignUpUsing: {
+    color: "grey",
+    fontFamily: "Bellfoods",
+    marginTop: 15,
+  },
+  googleIcon: {
+    marginVertical: 10,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  signUpBottom: {
+    marginTop: 25,
+    alignItems: "center",
+  },
+  orSignUpUsingText: {
+    color: "grey",
+    fontFamily: "Bellfoods",
+  },
+  gradientSignUpButton: {
+    backgroundColor: "pink",
+    borderRadius: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 40,
+    width: 100,
+    marginTop: 15,
+    display: "flex",
+    flexDirection: "column",
+    // 🔹 iOS SHADOW
+    shadowColor: "#000",
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+
+    // 🔹 Android SHADOW
+    elevation: 8,
+    margin: 5,
+  },
+  orSignUpUsingBottom: {
+    fontFamily: "Bellfoods",
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  googleIconWrapper: {
+    backgroundColor: "white",
+    borderRadius: 30,
+    width: 60,
+    // 🔹 iOS SHADOW
+    shadowColor: "#000",
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+
+    // 🔹 Android SHADOW
+    elevation: 8,
+    margin: 5,
+  },
+  pantryQuestImageContainer: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 200,
+    height: 60,
+  },
+  appLogo: {
+    width: 60,
+    height: 60,
+    marginTop: 10,
+    padding: 15,
+    resizeMode: "contain",
   },
 });

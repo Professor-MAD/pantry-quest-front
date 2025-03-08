@@ -96,4 +96,49 @@ const styles = StyleSheet.create({
   },
   label: { fontSize: 16, fontWeight: "bold", color: "black" },
   value: { fontSize: 16, color: "grey", marginBottom: 10 },
+  signOutText: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
+    marginTop: 10,
+    width: 100,
+    textAlign: "center",
+    height: 30,
+    borderRadius: 30,
+    // 🔹 iOS SHADOW
+    shadowColor: "#000",
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+
+    // 🔹 Android SHADOW
+    elevation: 8,
+    margin: 5,
+  },
+  button: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    // backgroundColor: "white",
+    marginTop: 10,
+    width: 100,
+    textAlign: "center",
+    height: 30,
+    borderRadius: 30,
+    // 🔹 iOS SHADOW
+    shadowColor: "#000",
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+
+    // 🔹 Android SHADOW
+    elevation: 8,
+    margin: 5,
+  },
+  buttonText: {
+    backgroundColor: "transparent",
+  },
 });

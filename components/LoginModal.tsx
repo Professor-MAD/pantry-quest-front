@@ -191,4 +191,45 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
+  googleIcon: {
+    marginVertical: 10,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  googleIconWrapper: {
+    backgroundColor: "white",
+    borderRadius: 30,
+    width: 60,
+    // 🔹 iOS SHADOW
+    shadowColor: "#000",
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+
+    // 🔹 Android SHADOW
+    elevation: 8,
+    margin: 5,
+  },
+  orSignUpUsing: {
+    color: "grey",
+    fontFamily: "Bellfoods",
+    marginTop: 15,
+  },
+  pantryQuestImageContainer: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 200,
+    height: 60,
+  },
+  appLogo: {
+    width: 60,
+    height: 60,
+    marginTop: 10,
+    padding: 15,
+    resizeMode: "contain",
+  },
 });
