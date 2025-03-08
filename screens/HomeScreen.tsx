@@ -54,7 +54,7 @@ export default function HomeScreen({ navigation }) {
               onPress={() => navigation.navigate("Pantry")}
             >
               <Image
-                source={require("../assets/pantry-mascot.png")}
+                source={require("../assets/pantry-icon.png")}
                 style={styles.icon}
               />
               <View style={styles.buttonBackground}>
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     width: 90,
-    height: 100,
+    height: 120,
     marginBottom: 0,
     marginTop: 50,
   },
