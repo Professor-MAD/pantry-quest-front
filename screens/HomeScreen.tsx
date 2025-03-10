@@ -212,6 +212,12 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     marginTop: 50,
   },
+  listIcon: {
+    width: 90,
+    height: 130,
+    marginBottom: 0,
+    marginTop: 50,
+  },
   mainIconContainer: {
     width: "100%",
     justifyContent: "center",
