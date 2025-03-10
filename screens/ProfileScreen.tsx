@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
     // 🔹 Android SHADOW
     elevation: 8,
     margin: 5,
+    fontFamily: "Bellfoods",
   },
   button: {
     display: "flex",
@@ -137,9 +138,11 @@ const styles = StyleSheet.create({
     // 🔹 Android SHADOW
     elevation: 8,
     margin: 5,
+    fontFamily: "Bellfoods",
   },
   buttonText: {
     backgroundColor: "transparent",
+    fontFamily: "Bellfoods",
   },
   gradient: {
     display: "flex",
@@ -157,6 +160,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 4, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 5,
+    fontFamily: "Bellfoods",
 
     // 🔹 Android SHADOW
     elevation: 8,
