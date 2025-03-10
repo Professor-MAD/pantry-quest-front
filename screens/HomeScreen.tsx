@@ -67,8 +67,8 @@ export default function HomeScreen({ navigation }) {
               onPress={() => navigation.navigate("Grocery")}
             >
               <Image
-                source={require("../assets/list-mascot.png")}
-                style={styles.icon}
+                source={require("../assets/list-icon.png")}
+                style={styles.listIcon}
               />
               <View style={styles.buttonBackground}>
                 <Text style={styles.buttonText}>Grocery List</Text>
