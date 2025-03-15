@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     backgroundColor: "white",
-    padding: 15,
+    padding: 5,
     borderRadius: 10,
     width: "100%",
   },
