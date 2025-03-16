@@ -29,7 +29,7 @@ export default function AccountInfo() {
   }
 
   return (
-    <View style={user ? styles.profileContainer : styles.container}>
+    <View style={user ? styles.profileContainer : styles.accountInfoContainer}>
       {user ? (
         <ProfileScreen user={user} onSignOut={() => setUser(null)} />
       ) : onSignUpPage ? (
@@ -45,7 +45,7 @@ export default function AccountInfo() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  accountInfoContainer: {
     position: "absolute",
     backgroundColor: "#ed846a",
     zIndex: 300,
