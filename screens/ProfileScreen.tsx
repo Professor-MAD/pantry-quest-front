@@ -24,14 +24,14 @@ export default function ProfileScreen({ onSignOut }) {
 
   if (!user) {
     return (
-      <View style={styles.container}>
+      <View style={styles.profileScreenContainer}>
         <Text style={styles.header}>No User Logged In</Text>
       </View>
     );
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.profileScreenContainer}>
       <Text style={styles.header}>Profile</Text>
 
       <View style={styles.infoContainer}>
@@ -75,7 +75,7 @@ export default function ProfileScreen({ onSignOut }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  profileScreenContainer: {
     flex: 1,
     backgroundColor: "#f9d4ba",
     alignItems: "center",
