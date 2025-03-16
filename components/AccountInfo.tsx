@@ -47,7 +47,7 @@ export default function AccountInfo() {
 const styles = StyleSheet.create({
   accountInfoContainer: {
     position: "absolute",
-    backgroundColor: "#ed846a",
+    // backgroundColor: "#ed846a",
     zIndex: 300,
     height: "100%",
     width: "100%",
@@ -59,22 +59,11 @@ const styles = StyleSheet.create({
     elevation: 8,
     margin: 5,
   },
+  // THIS CLASS CONTROLS SIZE - FOR MOST OTHER STUFF GO TO PROFILESCREEN.TSX, profileScreenContainer CLASS
   profileContainer: {
     flex: 1,
-    backgroundColor: "#f9d4ba",
+    // backgroundColor: "#f9d4ba",
     width: "100%",
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 5,
-    // 🔹 iOS SHADOW
-    shadowColor: "#000",
-    shadowOffset: { width: 4, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-
-    // 🔹 Android SHADOW
-    elevation: 8,
-    margin: 5,
     fontFamily: "Bellfoods",
   },
   loadingContainer: {
