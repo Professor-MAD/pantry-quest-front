@@ -63,6 +63,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#f9d4ba",
     width: "100%",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 5,
+    // 🔹 iOS SHADOW
+    shadowColor: "#000",
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+
+    // 🔹 Android SHADOW
+    elevation: 8,
+    margin: 5,
+    fontFamily: "Bellfoods",
   },
   loadingContainer: {
     flex: 1,
