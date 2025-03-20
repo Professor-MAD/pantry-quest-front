@@ -10,8 +10,25 @@ import {
 } from "react-native";
 import Footer from "@/components/Footer";
 import AccountInfo from "@/components/AccountInfo";
+import { StackNavigationProp } from "@react-navigation/stack"; // ✅ Import Navigation Type
+import { RouteProp } from "@react-navigation/native";
 
-export default function HomeScreen({ navigation }) {
+// ✅ Define Navigation Type
+type RootStackParamList = {
+  Home: undefined;
+  Pantry: undefined;
+  Grocery: undefined;
+  Recipes: undefined;
+  Settings: undefined;
+};
+
+// ✅ Define Props for HomeScreen
+interface HomeScreenProps {
+  navigation: StackNavigationProp<RootStackParamList, "Home">;
+  route: RouteProp<RootStackParamList, "Home">;
+}
+
+export default function HomeScreen({ navigation }: HomeScreenProps) {
   const [showAccountInfoModal, setShowAccountInfoModal] = useState(false);
 
   return (

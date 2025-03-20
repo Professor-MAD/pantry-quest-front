@@ -1,5 +1,10 @@
 import React from "react";
 import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { NavigationProp } from "@react-navigation/native";
+
+interface NavFooterProps {
+  navigation: NavigationProp<any>;
+}
 
 export default function NavFooter({ navigation }) {
   return (

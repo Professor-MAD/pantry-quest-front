@@ -1,10 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import NavFooter from "@/components/NavFooter";
 
 export default function GroceryListScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>This is the Grocery List Page</Text>
+      <NavFooter />
     </View>
   );
 }
