@@ -47,7 +47,7 @@ export default function AccountInfo() {
 const styles = StyleSheet.create({
   accountInfoContainer: {
     position: "absolute",
-    // backgroundColor: "#ed846a",
+    backgroundColor: "#ed846a",
     zIndex: 300,
     height: "100%",
     width: "100%",
