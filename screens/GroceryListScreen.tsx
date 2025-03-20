@@ -6,7 +6,10 @@ export default function GroceryListScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>This is the Grocery List Page</Text>
-      <NavFooter navigation={navigation} />
+      {/* Footer */}
+      <View style={styles.navFooterGrocery}>
+        <NavFooter navigation={navigation} />
+      </View>
     </View>
   );
 }
@@ -21,5 +24,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
+  },
+  navFooterGrocery: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    height: 80,
+    zIndex: 10,
   },
 });
