@@ -25,4 +25,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
   },
+  navFooterSettings: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    height: 80,
+    zIndex: 10,
+  },
 });
