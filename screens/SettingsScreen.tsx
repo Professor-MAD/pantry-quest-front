@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import NavFooter from "@/components/NavFooter";
 
-export default function SettingsScreen() {
+export default function SettingsScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>This is the Settings Page</Text>
