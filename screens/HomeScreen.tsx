@@ -10,10 +10,9 @@ import {
 } from "react-native";
 import Footer from "@/components/Footer";
 import AccountInfo from "@/components/AccountInfo";
-import { StackNavigationProp } from "@react-navigation/stack"; // ✅ Import Navigation Type
+import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
 
-// ✅ Define Navigation Type
 type RootStackParamList = {
   Home: undefined;
   Pantry: undefined;
@@ -22,7 +21,6 @@ type RootStackParamList = {
   Settings: undefined;
 };
 
-// ✅ Define Props for HomeScreen
 interface HomeScreenProps {
   navigation: StackNavigationProp<RootStackParamList, "Home">;
   route: RouteProp<RootStackParamList, "Home">;
