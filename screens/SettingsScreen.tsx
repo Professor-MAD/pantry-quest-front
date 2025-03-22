@@ -6,6 +6,10 @@ export default function SettingsScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>This is the Settings Page</Text>
+      {/* Footer */}
+      <View style={styles.navFooterGrocery}>
+        <NavFooter navigation={navigation} />
+      </View>
     </View>
   );
 }
