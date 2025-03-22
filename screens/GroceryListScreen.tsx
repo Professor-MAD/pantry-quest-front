@@ -8,7 +8,7 @@ export default function GroceryListScreen({ navigation }) {
       <Text style={styles.title}>This is the Grocery List Page</Text>
       {/* Footer */}
       <View style={styles.navFooterGrocery}>
-        <NavFooter navigation={navigation} />
+        <NavFooter navigation={navigation} currentScreen="Grocery" />
       </View>
     </View>
   );

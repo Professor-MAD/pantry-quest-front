@@ -7,7 +7,7 @@ export default function RecipeScreen({ navigation }) {
     <View style={styles.container}>
       <Text style={styles.title}>This is the Recipes Page</Text>
       <View style={styles.navFooterRecipe}>
-        <NavFooter navigation={navigation} />
+        <NavFooter navigation={navigation} currentScreen="Recipes" />
       </View>
     </View>
   );

@@ -178,7 +178,7 @@ export default function PantryScreen({ navigation }) {
 
       {/* Footer */}
       <View style={styles.navFooter}>
-        <NavFooter navigation={navigation} />
+        <NavFooter navigation={navigation} currentScreen="Pantry" />
       </View>
     </View>
   );

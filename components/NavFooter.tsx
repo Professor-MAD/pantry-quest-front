@@ -4,48 +4,35 @@ import { NavigationProp } from "@react-navigation/native";
 
 interface NavFooterProps {
   navigation: NavigationProp<any>;
+  currentScreen: string;
 }
 
-export default function NavFooter({ navigation }) {
+export default function NavFooter({
+  navigation,
+  currentScreen,
+}: NavFooterProps) {
+  const buttons = [
+    { screen: "Home", icon: require("../assets/home-button.png") },
+    { screen: "Pantry", icon: require("../assets/pantry-icon.png") },
+    { screen: "Grocery", icon: require("../assets/list-icon.png") },
+    { screen: "Recipes", icon: require("../assets/recipe-button.png") },
+    { screen: "Settings", icon: require("../assets/setting-button.png") },
+  ];
+
+  const filteredButtons = buttons.filter((btn) => btn.screen !== currentScreen);
+
   return (
     <View style={styles.container}>
       <View style={styles.iconRow}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Home")}
-        >
-          <Image
-            source={require("../assets/home-button.png")}
-            style={styles.icon}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Grocery")}
-        >
-          <Image
-            source={require("../assets/list-button.png")}
-            style={styles.icon}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Recipes")}
-        >
-          <Image
-            source={require("../assets/recipe-button.png")}
-            style={styles.icon}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Settings")}
-        >
-          <Image
-            source={require("../assets/setting-button.png")}
-            style={styles.icon}
-          />
-        </TouchableOpacity>
+        {filteredButtons.map((btn) => (
+          <TouchableOpacity
+            key={btn.screen}
+            style={styles.button}
+            onPress={() => navigation.navigate(btn.screen)}
+          >
+            <Image source={btn.icon} style={styles.icon} />
+          </TouchableOpacity>
+        ))}
       </View>
     </View>
   );

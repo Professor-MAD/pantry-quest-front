@@ -8,7 +8,7 @@ export default function SettingsScreen({ navigation }) {
       <Text style={styles.title}>This is the Settings Page</Text>
       {/* Footer */}
       <View style={styles.navFooterSettings}>
-        <NavFooter navigation={navigation} />
+        <NavFooter navigation={navigation} currentScreen="Settings" />
       </View>
     </View>
   );
