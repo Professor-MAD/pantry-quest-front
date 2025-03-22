@@ -17,7 +17,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    Bellfoods: require("./assets/fonts/Bellfoods.otf"),
+    Bellfoods: require("./assets/fonts/Bellfoods.ttf"),
   });
 
   const onLayoutRootView = useCallback(async () => {
