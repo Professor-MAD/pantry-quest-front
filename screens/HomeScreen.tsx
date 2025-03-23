@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   TouchableWithoutFeedback,
+  Pressable,
   Keyboard,
 } from "react-native";
 import Footer from "@/components/Footer";
