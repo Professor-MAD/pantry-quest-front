@@ -1,5 +1,5 @@
-import React, { useCallback } from "react";
-import { View } from "react-native"; // Add View for onLayout
+import React, { useCallback, useEffect } from "react";
+import { View, LogBox } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "./screens/HomeScreen";
@@ -7,12 +7,11 @@ import PantryScreen from "./screens/PantryScreen";
 import GroceryListScreen from "./screens/GroceryListScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import RecipeScreen from "./screens/RecipeScreen";
+import FridgeScreen from "./screens/FridgeScreen";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
-import FridgeScreen from "./screens/FridgeScreen";
 
 const Stack = createStackNavigator();
-
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
@@ -20,15 +19,21 @@ export default function App() {
     Bellfoods: require("./assets/fonts/Bellfoods.ttf"),
   });
 
+  useEffect(() => {
+    if (!fontsLoaded) {
+      console.log("⏳ Waiting for fonts to load...");
+    } else {
+      console.log("✅ Font Bellfoods loaded successfully.");
+    }
+  }, [fontsLoaded]);
+
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
       await SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
 
-  if (!fontsLoaded) {
-    return null;
-  }
+  if (!fontsLoaded) return null;
 
   return (
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>

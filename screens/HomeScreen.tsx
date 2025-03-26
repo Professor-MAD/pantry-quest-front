@@ -6,13 +6,14 @@ import {
   TouchableOpacity,
   Image,
   TouchableWithoutFeedback,
-  Pressable,
   Keyboard,
 } from "react-native";
 import Footer from "@/components/Footer";
 import AccountInfo from "@/components/AccountInfo";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
+
+// Navigation types
 
 type RootStackParamList = {
   Home: undefined;
@@ -53,13 +54,19 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
 
         <View style={styles.titleContainer}>
           <Text
-            style={[styles.title, styles.titleOutline, { left: -2, top: -2 }]}
+            style={[
+              styles.title,
+              styles.titleOutline,
+              { left: -2, top: -2, fontFamily: "Bellfoods" },
+            ]}
           >
             Pantry Quest
           </Text>
 
           {/* Main Text */}
-          <Text style={styles.title}>Pantry Quest</Text>
+          <Text style={[styles.title, { fontFamily: "Bellfoods" }]}>
+            Pantry Quest
+          </Text>
         </View>
 
         <View style={styles.mainContentContainer}>
@@ -74,7 +81,9 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                 style={styles.icon}
               />
               <View style={styles.buttonBackground}>
-                <Text style={styles.buttonText}>Pantry</Text>
+                <Text style={[styles.buttonText, { fontFamily: "Bellfoods" }]}>
+                  Pantry
+                </Text>
               </View>
             </TouchableOpacity>
 
@@ -87,7 +96,9 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                 style={styles.listIcon}
               />
               <View style={styles.buttonBackground}>
-                <Text style={styles.buttonText}>Grocery List</Text>
+                <Text style={[styles.buttonText, { fontFamily: "Bellfoods" }]}>
+                  Grocery List
+                </Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -103,7 +114,9 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                 style={styles.icon}
               />
               <View style={styles.buttonBackground}>
-                <Text style={styles.buttonText}>Recipes</Text>
+                <Text style={[styles.buttonText, { fontFamily: "Bellfoods" }]}>
+                  Recipes
+                </Text>
               </View>
             </TouchableOpacity>
 
@@ -116,7 +129,9 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                 style={styles.icon}
               />
               <View style={styles.buttonBackground}>
-                <Text style={styles.buttonText}>Settings</Text>
+                <Text style={[styles.buttonText, { fontFamily: "Bellfoods" }]}>
+                  Settings
+                </Text>
               </View>
             </TouchableOpacity>
           </View>
